@@ -8,7 +8,7 @@ import Container from '@mui/material/Container';
 //import { resetUserData } from '../../redux/slices/auth';
 
 export const Header = () => {
-  const isAuth = false;
+  const isAuth = true;
 
   const onClickLogout = () => {};
 
