@@ -30,10 +30,10 @@ export const Header = () => {
               ) : (
                   <>
                     <Link to="/login">
-                      <Button variant="contained">Войти</Button>
+                      <Button variant="outlined">Войти</Button>
                     </Link>
                     <Link to="/register">
-                      <Button variant="contained">Регистрация</Button>
+                      <Button variant="outlined">Регистрация</Button>
                     </Link>
                   </>
               )}
