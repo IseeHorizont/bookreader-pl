@@ -1,5 +1,5 @@
-import React from 'react';
-import Tabs from '@mui/material/Tabs';
+import React, {useState} from 'react';
+//import Tabs from '@mui/material/Tabs';
 import Grid from '@mui/material/Grid';
 import { Post } from "../components/Post";
 import { TagsBlock } from "../components/TagsBlock";
@@ -9,13 +9,27 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
+import axios from '../axios';
 
 export const Home = () => {
     const [value, setValue] = React.useState('1');
 
-    const handleChange = (event, newValue) => {
+    const handleChange = (value, newValue) => {
         setValue(newValue);
     };
+
+    const [events, setEvents] = useState({});
+    let postsLoading = false;
+
+    React.useEffect(() => {
+        axios.get('/event/')
+            .then((response) => {
+                console.log(response.data);
+                setEvents(response.data);
+                postsLoading = true;
+            })
+    }, []);
+
 
     return (
         <Box sx={{ marginBottom: 15, width: '100%', typography: 'body1' }}>
@@ -31,10 +45,12 @@ export const Home = () => {
                 <TabPanel value="1">
                     <Grid container spacing={4}>
                         <Grid xs={8} item>
-                            {[...Array(5)].map(() => (
+                            {events.map((obj, index) => (
                                 <Post
-                                    id={1}
-                                    title="Event #1"
+                                    key={index}
+                                    title={obj.description}
+                                    book={obj.bookAuthor + " / " + obj.bookTitle}
+                                    //creatorName={obj.creatorName}
                                     imageUrl="https://img.freepik.com/premium-vector/people-reading-park_73637-401.jpg?w=2000"
                                     //imageUrl="https://img.freepik.com/free-vector/colorful-equalizer-wave-background_23-2148421846.jpg?w=2000&t=st=1693334339~exp=1693334939~hmac=d7f93f45baf3b6e43aba9e41cea7e736bfa9bcf5163b60c4f8b7313b36c32039"
                                     user={{
@@ -47,12 +63,14 @@ export const Home = () => {
                                     commentsCount={332}
                                     tags={["best", "fun"]}
                                     isEditable
+                                    isLoading={postsLoading === 'loaded'}
                                 />
                             ))}
+
                         </Grid>
                             <Grid xs={4} item>
                                 <TagsBlock
-                                    items={["best", "fun", "huinya"]}
+                                    items={["bestseller", "fun", "historic"]}
                                     isLoading={false}
                                 />
                                 <CommentsBlock
@@ -66,7 +84,7 @@ export const Home = () => {
                                         },
                                         {
                                             user: {
-                                                fullName: "Иван Долтавалов",
+                                                fullName: "Иван Доставалов",
                                                 avatarUrl: "https://img.freepik.com/free-psd/3d-illustration-person-with-glasses_23-2149436189.jpg?w=2000&t=st=1693334811~exp=1693335411~hmac=b139cdad69fa6b60313326e17037575dd12df8a0a589a555dc200b1fbeed35cf",
                                             },
                                             text: "Тест комментария тут. Тест комментария тут. Тест комментария тут",
