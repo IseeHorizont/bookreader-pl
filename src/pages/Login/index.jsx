@@ -11,54 +11,42 @@ import { useNavigate } from "react-router-dom";
 
 
 export const Login = () => {
-    const [token, setToken] = useState('');
+    //const [token, setToken] = useState('');
     const navigate = useNavigate();
 
     const {
         register,
         handleSubmit,
         setError,
-        formState: {errors, isValid},
+        formState: { errors },
     } = useForm({
         defaultValues: {
-            email: 'react@test.io',
-            password: '111222333'
+            email: 'reacttester@test.com',
+            password: '12345'
         },
         mode: 'onChange',
     });
 
-    const onSubmit = (creds) => {
+    const onSubmit = async (creds) => {
         console.log("creds: " + creds.email + " " + creds.password);
-        // axios.post('/auth/register', creds)
-        //     .then((response) => {
-        //         setToken(response.data.token);
-        //         console.log("Token: " + token);
-        //     });
-        localStorage.setItem('token', 'testToken'); // todo save token
-
-        if (localStorage.token !== 'default') {
+        try {
+            const { data } = await axios.post('/auth/authenticate', creds);
+            window.localStorage.setItem('token', data.token);
             navigate('/');
+        } catch (error) {
+            console.log("Login: " + error);
+            if (error.isAxiosError) {
+                if (error.response.data.errors) {
+                    error.response.data.errors.forEach((obj) => {
+                        setError(obj.param, { message: obj.msg }, { shouldFocus: true });
+                    });
+                }
+                if (error.response.data.message) {
+                    setError('email', { message: error.response.data.message }, { shouldFocus: true });
+                }
+                alert('Неверный email или пароль');
+            }
         }
-
-        // todo example
-        // try {
-        //     const { data } = await axios.post('/auth/login', fields);
-        //     dispatch(setUserData(data));
-        //     window.localStorage.setItem('token', data.token);
-        //     navigate('/');
-        // } catch (error) {
-        //     console.log(error);
-        //     if (error.isAxiosError) {
-        //         if (error.response.data.errors) {
-        //             error.response.data.errors.forEach((obj) => {
-        //                 setError(obj.param, { message: obj.msg }, { shouldFocus: true });
-        //             });
-        //         }
-        //         if (error.response.data.message) {
-        //             setError('email', { message: error.response.data.message }, { shouldFocus: true });
-        //         }
-        //     }
-        // }
     }
 
     return (
@@ -68,26 +56,26 @@ export const Login = () => {
             </Typography>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <TextField
-                    required
+                    //required
                     className={styles.field}
-                    label="Email"
+                    label="E-mail"
                     type="email"
-                    defaultValue="example@gmail.com"
-                    {...register('email', {required: 'Введите корректный email-адрес'})}
-                    error={Boolean(errors.email?.message)}
+                    error={!!errors.email}
                     helperText={errors.email?.message}
+                    {...register('email', { required: 'Введите корректный email-адрес' })}
                     fullWidth
                 />
                 <TextField
-                    required
+                    //required
                     className={styles.field}
                     label="Пароль"
                     type="password"
-                    {...register('password', {required: 'Введите свой пароль'})}
-                    error={Boolean(errors.password?.message)}
+                    error={errors.password?.message}
                     helperText={errors.password?.message}
+                    {...register('password', { required: 'Введите свой пароль' })}
                     fullWidth
                 />
+
                 <Button type="submit" size="large" variant="contained" fullWidth>
                     Войти
                 </Button>

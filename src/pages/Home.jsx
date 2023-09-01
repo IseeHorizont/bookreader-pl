@@ -131,8 +131,8 @@ export const Home = () => {
                                             fullName: obj.creatorName
                                         }}
                                         createdAt={obj.createdAt}
-                                        viewsCount={150001}
-                                        commentsCount={332}
+                                        viewsCount={154}
+                                        commentsCount={12}
                                         tags={[obj.categoryName]}
                                         isEditable
                                         isLoading={postsLoading === 'loaded'}
