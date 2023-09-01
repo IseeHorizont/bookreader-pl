@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 //import { useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 import styles from './Header.module.scss';
 import Container from '@mui/material/Container';
-//import { resetUserData } from '../../redux/slices/auth';
 
 export const Header = () => {
-  const isAuth = false;
+  const navigate = useNavigate();
+  let isAuth = localStorage.getItem('token');
 
-  const onClickLogout = () => {};
+  const onClickLogout = () => {
+      //localStorage.token = 'default';
+      //localStorage.removeItem('token');
+      localStorage.clear();
+      isAuth = null;
+      window.location.reload();
+  };
 
   return (
       <div className={styles.root}>
@@ -25,7 +31,7 @@ export const Header = () => {
                     <Link to="/posts/create">
                       <Button variant="outlined" color="primary">Создать событие</Button>
                     </Link>
-                    <Button onClik={onClickLogout} variant="outlined" color="error">Выйти</Button>
+                    <Button onClick={onClickLogout} variant="outlined" color="error">Выйти</Button>
                   </>
               ) : (
                   <>

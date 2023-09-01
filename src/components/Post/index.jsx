@@ -9,11 +9,12 @@ import CommentIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 
 import styles from "./Post.module.scss";
 import { UserInfo } from "../UserInfo";
+import Typography from "@mui/material/Typography";
 
 export const Post = ({
   id,
   title,
-                       book,
+  book,
   createdAt,
   imageUrl,
   //creatorName,
@@ -36,7 +37,7 @@ export const Post = ({
     <div className={clsx(styles.root, { [styles.rootFull]: isFullPost })}>
       {isEditable && (
         <div className={styles.editButtons}>
-          <Link to={`/posts/${id}/edit`}>                                         {/* todo */}
+          <Link to={`/posts/${id}/edit`}>
             <IconButton color="primary">
               <EditIcon />
             </IconButton>
@@ -56,10 +57,7 @@ export const Post = ({
       <div className={styles.wrapper}>
         <UserInfo {...user} additionalText={createdAt} />
         <div className={styles.indention}>
-          <h4 className={clsx(styles.title, { [styles.titleFull]: isFullPost })}>
-            {isFullPost ? title : <Link to={`/posts/${id}`}>{title}</Link>}
-          </h4>
-          <h4>{book}</h4>
+          <Link to={`/event/${id}`}>{book}</Link>
           <ul className={styles.tags}>
             {tags.map((name) => (
               <li key={name}>
