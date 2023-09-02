@@ -13,6 +13,7 @@ import axios from '../axios';
 import Typography from "@mui/material/Typography";
 
 export const Home = () => {
+
     const [value, setValue] = React.useState('1');
     const [events, setEvents] = useState([]);
     const [newEvents, setNewEvents] = useState([]);
@@ -86,8 +87,8 @@ export const Home = () => {
                                             fullName: obj.creatorName
                                         }}
                                         createdAt={obj.createdAt}
-                                        viewsCount={150001}
-                                        commentsCount={332}
+                                        viewsCount={Math.floor(Math.random() * 50) + 1}
+                                        commentsCount={Math.floor(Math.random() * 50) + 1}
                                         tags={[obj.categoryName]}
                                         isEditable
                                     />
@@ -135,8 +136,8 @@ export const Home = () => {
                                             fullName: obj.creatorName
                                         }}
                                         createdAt={obj.createdAt}
-                                        viewsCount={154}
-                                        commentsCount={12}
+                                        viewsCount={Math.floor(Math.random() * 50) + 1}
+                                        commentsCount={Math.floor(Math.random() * 50) + 1}
                                         tags={[obj.categoryName]}
                                         isEditable
                                     />
@@ -186,8 +187,8 @@ export const Home = () => {
                                                     fullName: obj.creatorName
                                                 }}
                                                 createdAt={obj.createdAt}
-                                                viewsCount={154}
-                                                commentsCount={12}
+                                                viewsCount={Math.floor(Math.random() * 50) + 1}
+                                                commentsCount={Math.floor(Math.random() * 50) + 1}
                                                 tags={[obj.categoryName]}
                                                 isEditable
                                             />
@@ -258,8 +259,8 @@ export const Home = () => {
                                             fullName: obj.creatorName
                                         }}
                                         createdAt={obj.createdAt}
-                                        viewsCount={154}
-                                        commentsCount={12}
+                                        viewsCount={Math.floor(Math.random() * 50) + 1}
+                                        commentsCount={Math.floor(Math.random() * 50) + 1}
                                         tags={[obj.categoryName]}
                                         isEditable
                                     />
@@ -307,8 +308,8 @@ export const Home = () => {
                                             fullName: obj.creatorName
                                         }}
                                         createdAt={obj.createdAt}
-                                        viewsCount={154}
-                                        commentsCount={12}
+                                        viewsCount={Math.floor(Math.random() * 50) + 1}
+                                        commentsCount={Math.floor(Math.random() * 50) + 1}
                                         tags={[obj.categoryName]}
                                         isEditable
                                     />
