@@ -5,7 +5,7 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 
-import styles from "./Login.module.scss";
+import styles from "./Registration.module.scss";
 import {useForm} from "react-hook-form";
 import axios from "../../axios";
 import { useNavigate } from "react-router-dom";
