@@ -4,6 +4,7 @@ import Container from "@mui/material/Container";
 import { Routes, Route } from 'react-router-dom';
 import { Registration } from "./pages/Registration";
 import { Login } from "./pages/Login";
+import { ErrorPage } from "./pages/ErrorPage";
 
 
 function App() {
@@ -15,9 +16,10 @@ function App() {
             <Route element={<Home />} path="/" />
             {/*<Route element={<AddPost />} path="/posts/create" />*/}
             {/*<Route element={<AddPost />} path="/posts/:id/edit" />*/}
-            {/*<Route element={<FullPost />} path="/posts/:id" />*/}
+            {/*<Route element={<FullEvent />} path="/event/:eventId" />*/}
             <Route element={<Login />} path="/login" />
             <Route element={<Registration />} path="/register" />
+            <Route path="*" element={<ErrorPage />} />
           </Routes>
         </Container>
       </>

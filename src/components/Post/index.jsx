@@ -9,35 +9,36 @@ import CommentIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 
 import styles from "./Post.module.scss";
 import { UserInfo } from "../UserInfo";
-import Typography from "@mui/material/Typography";
+import {EventSkeleton} from "./Skeleton";
 
 export const Post = ({
   id,
   title,
   book,
+  description,
   createdAt,
   imageUrl,
-  //creatorName,
   user,
   viewsCount,
   commentsCount,
   tags,
   children,
-  isFullPost,
+  isFullEvent,
   isLoading,
   isEditable,
 }) => {
-  // if (isLoading) {
-  //   return <PostSkeleton />;
-  // }
+
+  if (isLoading) {
+    return <EventSkeleton />;
+  }
 
   const onClickRemove = () => {};
 
   return (
-    <div className={clsx(styles.root, { [styles.rootFull]: isFullPost })}>
+    <div className={clsx(styles.root, { [styles.rootFull]: isFullEvent })}>
       {isEditable && (
         <div className={styles.editButtons}>
-          <Link to={`/posts/${id}/edit`}>
+          <Link to={`/event/${id}`}>
             <IconButton color="primary">
               <EditIcon />
             </IconButton>
@@ -49,19 +50,28 @@ export const Post = ({
       )}
       {imageUrl && (
         <img
-          className={clsx(styles.image, { [styles.imageFull]: isFullPost })}
+          className={clsx(styles.image, { [styles.imageFull]: isFullEvent })}
           src={imageUrl}
           alt={title}
         />
       )}
       <div className={styles.wrapper}>
         <UserInfo {...user} additionalText={createdAt} />
+
         <div className={styles.indention}>
-          <Link to={`/event/${id}`}>{book}</Link>
+          <h4 className={clsx(styles.title, { [styles.titleFull]: isFullEvent })}>
+            {/*{isFullEvent ? title : <Link to={`/event/${id}`}>{book}</Link>}*/}
+            <Link to={`/event/${id}`}>{book}</Link>
+          </h4>
+          {/*<p className={clsx(styles.title, { [styles.titleFull]: isFullEvent })}>*/}
+          {/*  {isFullEvent ? description : t}*/}
+          {/*</p>*/}
+
           <ul className={styles.tags}>
             {tags.map((name) => (
               <li key={name}>
-                <Link to={`/tag/${name}`}>#{name}</Link>
+                #{name}
+                {/* todo <Link to={`/tag/${name}`}>#{name}</Link>*/}
               </li>
             ))}
           </ul>

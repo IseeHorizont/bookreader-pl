@@ -30,6 +30,7 @@ export const Registration = () => {
         try {
             const { data } = await axios.post('/auth/register', userData);
             window.localStorage.setItem('token', data.token);
+            window.localStorage.setItem('email', userData.email);
             navigate('/');
         } catch (error) {
             console.log("Login: " + error);

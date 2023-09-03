@@ -14,7 +14,7 @@ import Typography from "@mui/material/Typography";
 
 export const Home = () => {
 
-    const [value, setValue] = React.useState('1');
+    const [value, setValue] = useState('1');
     const [events, setEvents] = useState([]);
     const [newEvents, setNewEvents] = useState([]);
     const [ownEvents, setOwnEvents] = useState([]);
@@ -34,6 +34,7 @@ export const Home = () => {
             .then((response) => {
                 setEvents(response.data);
             })
+        console.log(events);  // todo
 
         // last 10 the newest events
         axios.get('/event/new', { params: { Limit: 10 } })
@@ -55,15 +56,12 @@ export const Home = () => {
         <Box sx={{ marginBottom: 15, width: '100%', typography: 'body1' }}>
 
             {isAuth ? (
-                // all tabs
                 <TabContext value={value}>
                     <Box sx={{ borderBottom: 1, borderColor: 'divider',  }}>
                         <TabList
                             onChange={handleChange}
                             TabIndicatorProps={{
-                                style: {
-                                    backgroundColor: "#ffa08c",
-                                }
+                                style: {backgroundColor: "#ffa08c",}
                             }}
                         >
                             <Tab label="Все" value="1" />
@@ -72,14 +70,16 @@ export const Home = () => {
                             <Tab label="Популярные" value="4" />
                         </TabList>
                     </Box>
-
+                    {/* todo Auth && all events */}
                     <TabPanel value="1">
                         <Grid container spacing={4}>
                             <Grid xs={8} item>
                                 {events.map((obj, index) => (
                                     <Post
-                                        id={index}
-                                        title={obj.description}
+                                        _id={obj.id}
+
+                                        // todo title={obj.description}
+
                                         book={obj.bookAuthor + ": " + obj.bookTitle}
                                         imageUrl="https://img.freepik.com/premium-vector/people-reading-park_73637-401.jpg?w=2000"
                                         user={{
@@ -90,7 +90,7 @@ export const Home = () => {
                                         viewsCount={Math.floor(Math.random() * 50) + 1}
                                         commentsCount={Math.floor(Math.random() * 50) + 1}
                                         tags={[obj.categoryName]}
-                                        isEditable
+                                        isEditable={obj.creatorEmail === localStorage.getItem('email')}
                                     />
                                 ))}
 
@@ -122,6 +122,7 @@ export const Home = () => {
                             </Grid>
                         </Grid>
                     </TabPanel>
+                    {/* todo Auth && new events */}
                     <TabPanel value="2">
                         <Grid container spacing={4}>
                             <Grid xs={8} item>
@@ -139,7 +140,7 @@ export const Home = () => {
                                         viewsCount={Math.floor(Math.random() * 50) + 1}
                                         commentsCount={Math.floor(Math.random() * 50) + 1}
                                         tags={[obj.categoryName]}
-                                        isEditable
+                                        isEditable={obj.creatorEmail === localStorage.getItem('email')}
                                     />
                                 ))}
                             </Grid>
@@ -171,6 +172,7 @@ export const Home = () => {
                             </Grid>
                         </Grid>
                     </TabPanel>
+                    {/* todo Auth && own events */}
                     <TabPanel value="3">
                         {ownEvents.length > 0 ? (
                             <TabPanel value="3">
@@ -190,7 +192,7 @@ export const Home = () => {
                                                 viewsCount={Math.floor(Math.random() * 50) + 1}
                                                 commentsCount={Math.floor(Math.random() * 50) + 1}
                                                 tags={[obj.categoryName]}
-                                                isEditable
+                                                isEditable={obj.creatorEmail === localStorage.getItem('email')}
                                             />
                                         ))}
                                     </Grid>
@@ -225,12 +227,13 @@ export const Home = () => {
                             <Typography>У Вас ещё нет собственных событий</Typography>
                         )}
                     </TabPanel>
+                    {/* todo Auth && popular events */}
                     <TabPanel value="4">
                         <Typography>Раздел в разработке. Мы скоро!</Typography>
                     </TabPanel>
                 </TabContext>
             ) : (
-                // show tab: all & new
+                // todo isNotAuth: show tab: all & new
                 <TabContext value={value}>
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                         <TabList
@@ -262,7 +265,6 @@ export const Home = () => {
                                         viewsCount={Math.floor(Math.random() * 50) + 1}
                                         commentsCount={Math.floor(Math.random() * 50) + 1}
                                         tags={[obj.categoryName]}
-                                        isEditable
                                     />
                                 ))}
 
@@ -311,7 +313,6 @@ export const Home = () => {
                                         viewsCount={Math.floor(Math.random() * 50) + 1}
                                         commentsCount={Math.floor(Math.random() * 50) + 1}
                                         tags={[obj.categoryName]}
-                                        isEditable
                                     />
                                 ))}
                             </Grid>

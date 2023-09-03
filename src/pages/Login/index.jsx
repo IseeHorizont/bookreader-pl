@@ -32,6 +32,7 @@ export const Login = () => {
         try {
             const { data } = await axios.post('/auth/authenticate', creds);
             window.localStorage.setItem('token', data.token);
+            window.localStorage.setItem('email', creds.email);
             navigate('/');
         } catch (error) {
             console.log("Login: " + error);
