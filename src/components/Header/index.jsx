@@ -24,6 +24,10 @@ export const Header = () => {
       window.location.reload();
   };
 
+  // const onClickCreateEvent = () => {
+  //
+  // }
+
   React.useEffect(() => {
       setClientBadge(localStorage.getItem('clientAvatar'));
   }, []);
@@ -39,7 +43,7 @@ export const Header = () => {
               {isAuth ? (
                   <>
                       <Stack direction="row" spacing={3}>
-                        <Link to="/posts/create">
+                        <Link to="/event/">
                           <Button variant="outlined" color="primary">Создать событие</Button>
                         </Link>
                         <Button onClick={onClickLogout} variant="outlined" color="error">Выйти</Button>
