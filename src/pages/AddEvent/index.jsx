@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
@@ -11,43 +11,34 @@ import styles from './AddEvent.module.scss';
 
 export const AddEvent = () => {
     const navigate = useNavigate();
-    const { id } = useParams();
-    const inputFileRef = React.useRef(null);
+    //const { id } = useParams();
+    //const inputFileRef = React.useRef(null);
     const [isLoading, setIsLoading] = React.useState(false);
     const [fields, setFields] = React.useState({
-        title: '',
-        tags: '',
-        text: '',
+        eventTitle: '',
+        description: '',
+        bookTitle: '',
+        bookAuthor: '',
+        bookPublicationYear: '',
         imageUrl: '',
+        categoryName: ''
     });
 
-    const isEditing = Boolean(id);
-
-    React.useEffect(() => {
-        if (id) {
-            axios
-                .get(`/posts/${id}`)
-                .then(({ data }) => {
-                    setFields({
-                        ...data,
-                        tags: data.tags.join(','),
-                    });
-                })
-                .catch((err) => {
-                    alert('Ошибка при получении статьи');
-                    console.warn(err);
-                });
-        }
-    }, []);
-
-    const isEmptyFields = Object.values({ title: fields.title, text: fields.text }).some((v) => !v);
+    const isEmptyFields = Object.values({
+        eventTitle: fields.eventTitle,
+        description: fields.description,
+        bookTitle: fields.bookTitle,
+        bookAuthor: fields.bookTitle,
+        bookPublicationYear: fields.bookPublicationYear,
+        categoryName: fields.categoryName
+    }).some((v) => !v);
 
     const setFieldValue = (name, value) => {
         setFields((prev) => ({ ...prev, [name]: value }));
     };
 
     const onChange = React.useCallback((value) => {
-        setFieldValue('text', value);
+        setFieldValue('description', value);
     }, []);
 
     const options = React.useMemo(
@@ -55,7 +46,7 @@ export const AddEvent = () => {
             spellChecker: false,
             maxHeight: '400px',
             autofocus: true,
-            placeholder: 'Введите текст...',
+            placeholder: 'Добавьте описание события...',
             status: false,
             autosave: {
                 enabled: true,
@@ -65,91 +56,106 @@ export const AddEvent = () => {
         [],
     );
 
-    const handleChangeFile = async (e) => {
-        try {
-            const formData = new FormData();
-            formData.append('image', e.target.files[0]);
-            const { data } = await axios.post('/upload', formData);
-            setFieldValue('imageUrl', data.url);
-            e.target.value = '';
-        } catch (e) {
-            console.warn(e);
-            alert('Ошибка при загрузке файла');
-        }
-    };
-
     const onSubmit = async () => {
+        console.log(fields, fields.categoryName);
         try {
-            setIsLoading(true);
-            console.log(fields, fields.tags);
-
-            const apiMethod = isEditing
-                ? axios.patch.bind(this, `/posts/${id}`)
-                : axios.post.bind(this, '/posts');
-
-            const { data } = await apiMethod({
-                title: fields.title,
-                text: fields.text,
-                imageUrl: 'http://localhost:4444' + fields.imageUrl,
-                tags: fields.tags.split(','),
-            });
-
-            const postId = id || data._id;
-
-            navigate(`/posts/${postId}`);
-        } catch (error) {
+            await axios.post('/event/', {
+                    eventImage: fields.imageUrl,
+                    eventTitle: fields.eventTitle,
+                    description: fields.description,
+                    categoryName: fields.categoryName, // todo fields.categoryName.split(','),
+                    bookTitle: fields.bookTitle,
+                    bookAuthor: fields.bookAuthor,
+                    bookPublicationYear: fields.bookPublicationYear
+            }, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}
+                }
+            );
+            navigate('/');
+        }
+        catch (error) {
             console.log(error);
-        } finally {
-            setIsLoading(false);
+            alert('Ошибка при создании события. Попробуйте снова или позже...');
         }
     };
 
     return (
         <Paper style={{ padding: 30 }}>
-            <Button onClick={() => inputFileRef.current.click()} variant="outlined" size="large">
-                Загрузить превью
-            </Button>
-            <input ref={inputFileRef} hidden type="file" onChange={handleChangeFile} />
-            {fields.imageUrl && (
-                <Button
-                    variant="contained"
-                    color="error"
-                    onClick={() => {
-                        setFieldValue('imageUrl', '');
-                    }}>
-                    Удалить
-                </Button>
-            )}
-            {fields.imageUrl && (
-                <img className={styles.image} src={`http://localhost:4444${fields.imageUrl}`} />
-            )}
+            <TextField
+                value={fields.imageUrl}
+                onChange={(e) => setFieldValue('imageUrl', e.target.value)}
+                classes={{ root: styles.image }}
+                variant="filled"
+                placeholder="Превью Вашего события"
+                fullWidth
+            />
             <br />
+            <br />
+            {fields.imageUrl && (
+                <img className={styles.image} src={`${fields.imageUrl}`} />
+            )}
             <br />
             <TextField
-                value={fields.title}
-                onChange={(e) => setFieldValue('title', e.target.value)}
+                value={fields.eventTitle}
+                onChange={(e) => setFieldValue('eventTitle', e.target.value)}
                 classes={{ root: styles.title }}
                 variant="standard"
-                placeholder="Заголовок статьи..."
+                placeholder="Заголовок события..."
                 fullWidth
             />
             <TextField
-                value={fields.tags}
-                onChange={(e) => setFieldValue('tags', e.target.value)}
+                value={fields.categoryName}
+                onChange={(e) => setFieldValue('categoryName', e.target.value)}
                 classes={{ root: styles.tags }}
-                variant="standard"
-                placeholder="Тэги"
+                variant="filled"
+                placeholder="Укажите категорию для события"
                 fullWidth
             />
+            <br />
+            <br />
+
             <SimpleMDE
-                className={styles.editor}
-                value={fields.text}
+                className={styles.title}
+                value={fields.description}
                 onChange={onChange}
                 options={options}
             />
+            <br />
+
+            <TextField
+                label="Название книги"
+                value={fields.bookTitle}
+                onChange={(e) => setFieldValue('bookTitle', e.target.value)}
+                classes={{ root: styles.tags }}
+                variant="filled"
+                placeholder="Название книги"
+                fullWidth
+            />
+            <TextField
+                label="Автор книги"
+                value={fields.bookAuthor}
+                onChange={(e) => setFieldValue('bookAuthor', e.target.value)}
+                classes={{ root: styles.tags }}
+                variant="filled"
+                placeholder="Автор книги"
+                fullWidth
+            />
+            <TextField
+                label="Год издания"
+                value={fields.bookPublicationYear}
+                onChange={(e) => setFieldValue('bookPublicationYear', e.target.value)}
+                classes={{ root: styles.tags }}
+                variant="filled"
+                placeholder="Год издания"
+                fullWidth
+            />
+
+            <br />
+            <br />
+
             <div className={styles.buttons}>
                 <Button onClick={onSubmit} disabled={isEmptyFields} size="large" variant="contained">
-                    {!isEditing ? 'Опубликовать' : 'Сохранить'}
+                    {/*{!isEditing ? 'Опубликовать' : 'Сохранить'}*/}
+                    {'Опубликовать'}
                 </Button>
                 <Link to="/">
                     <Button disabled={isLoading} size="large">

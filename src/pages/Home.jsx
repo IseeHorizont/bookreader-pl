@@ -82,7 +82,7 @@ export const Home = () => {
                                         // todo title={obj.description}
 
                                         book={obj.bookAuthor + ": " + obj.bookTitle}
-                                        imageUrl="https://img.freepik.com/premium-vector/people-reading-park_73637-401.jpg?w=2000"
+                                        imageUrl={obj.eventImage}  //"https://img.freepik.com/premium-vector/people-reading-park_73637-401.jpg?w=2000"
                                         user={{
                                             avatarUrl: obj.avatar,
                                             fullName: obj.creatorName
@@ -132,7 +132,7 @@ export const Home = () => {
                                         id={index}
                                         title={obj.description}
                                         book={obj.bookAuthor + ": " + obj.bookTitle}
-                                        imageUrl="https://img.freepik.com/premium-vector/people-reading-park_73637-401.jpg?w=2000"
+                                        imageUrl={obj.eventImage}
                                         user={{
                                             avatarUrl: obj.avatar,
                                             fullName: obj.creatorName
@@ -184,7 +184,7 @@ export const Home = () => {
                                                 id={index}
                                                 title={obj.description}
                                                 book={obj.bookAuthor + ": " + obj.bookTitle}
-                                                imageUrl="https://img.freepik.com/premium-vector/people-reading-park_73637-401.jpg?w=2000"
+                                                imageUrl={obj.eventImage}
                                                 user={{
                                                     avatarUrl: obj.avatar,
                                                     fullName: obj.creatorName
@@ -257,7 +257,7 @@ export const Home = () => {
                                         id={index}
                                         title={obj.description}
                                         book={obj.bookAuthor + ": " + obj.bookTitle}
-                                        imageUrl="https://img.freepik.com/premium-vector/people-reading-park_73637-401.jpg?w=2000"
+                                        imageUrl={obj.eventImage}
                                         user={{
                                             avatarUrl: obj.avatar,
                                             fullName: obj.creatorName
@@ -305,7 +305,7 @@ export const Home = () => {
                                         id={index}
                                         title={obj.description}
                                         book={obj.bookAuthor + ": " + obj.bookTitle}
-                                        imageUrl="https://img.freepik.com/premium-vector/people-reading-park_73637-401.jpg?w=2000"
+                                        imageUrl={obj.eventImage}
                                         user={{
                                             avatarUrl: obj.avatar,
                                             fullName: obj.creatorName
