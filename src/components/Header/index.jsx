@@ -1,14 +1,20 @@
-import React, { useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 //import { useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
 import {Link, useNavigate} from 'react-router-dom';
 
 import styles from './Header.module.scss';
 import Container from '@mui/material/Container';
+import {StyledBadge} from "../StyledBadge";
+import Avatar from "@mui/material/Avatar";
+import Stack from "@mui/material/Stack";
+
 
 export const Header = () => {
   const navigate = useNavigate();
   let isAuth = localStorage.getItem('token');
+  //let badge = localStorage.getItem('clientAvatar');
+  const [clientBadge, setClientBadge] = useState(null);
 
   const onClickLogout = () => {
       //localStorage.token = 'default';
@@ -17,6 +23,10 @@ export const Header = () => {
       isAuth = null;
       window.location.reload();
   };
+
+  React.useEffect(() => {
+      setClientBadge(localStorage.getItem('clientAvatar'));
+  }, []);
 
   return (
       <div className={styles.root}>
@@ -28,11 +38,23 @@ export const Header = () => {
             <div className={styles.buttons}>
               {isAuth ? (
                   <>
-                    <Link to="/posts/create">
-                      <Button variant="outlined" color="primary">Создать событие</Button>
-                    </Link>
-                    <Button onClick={onClickLogout} variant="outlined" color="error">Выйти</Button>
+                      <Stack direction="row" spacing={3}>
+                        <Link to="/posts/create">
+                          <Button variant="outlined" color="primary">Создать событие</Button>
+                        </Link>
+                        <Button onClick={onClickLogout} variant="outlined" color="error">Выйти</Button>
+
+                          <StyledBadge
+                              overlap="circular"
+                              anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                              variant="dot"
+                          >
+                              <Avatar src={`${clientBadge}`} />
+                          </StyledBadge>
+                          {/*<Avatar src="/broken-image.jpg" />*/}
+                      </Stack>
                   </>
+
               ) : (
                   <>
                     <Link to="/login">

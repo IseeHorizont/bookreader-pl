@@ -18,6 +18,7 @@ export const Home = () => {
     const [events, setEvents] = useState([]);
     const [newEvents, setNewEvents] = useState([]);
     const [ownEvents, setOwnEvents] = useState([]);
+    //const [clientData, setClientData] = useState([]);
 
     let isAuth = localStorage.getItem('token');
 
