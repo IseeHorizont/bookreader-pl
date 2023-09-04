@@ -31,6 +31,14 @@ export const Registration = () => {
             const { data } = await axios.post('/auth/register', userData);
             window.localStorage.setItem('token', data.token);
             window.localStorage.setItem('email', userData.email);
+            // todo get & save user's avatar
+            axios.get('/client/badge', { headers: { Authorization: `Bearer ${data.token}`},
+                                                   params: { username: `${userData.email}` } }
+            )
+                .then((response) => {
+                    localStorage.setItem('clientAvatar', response.data.avatarImageUrl);
+                    console.log(localStorage.getItem('clientAvatar'));                  // todo
+                })
             navigate('/');
         } catch (error) {
             console.log("Login: " + error);

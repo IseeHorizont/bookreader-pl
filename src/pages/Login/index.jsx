@@ -21,7 +21,7 @@ export const Login = () => {
         formState: { errors },
     } = useForm({
         defaultValues: {
-            email: 'reacttester@test.com',
+            email: 'valera-go@gmail.com',
             password: '12345'
         },
         mode: 'onChange',
@@ -33,6 +33,15 @@ export const Login = () => {
             const { data } = await axios.post('/auth/authenticate', creds);
             window.localStorage.setItem('token', data.token);
             window.localStorage.setItem('email', creds.email);
+            // todo get & save user's avatar
+            axios.get('/client/badge',
+                { headers: { Authorization: `Bearer ${data.token}`},
+                          params: { username: `${creds.email}` } }
+                )
+                .then((response) => {
+                    localStorage.setItem('clientAvatar', response.data.avatarImageUrl);
+                    console.log(localStorage.getItem('clientAvatar'));                  // todo
+                })
             navigate('/');
         } catch (error) {
             console.log("Login: " + error);
