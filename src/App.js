@@ -1,9 +1,7 @@
-import { Home } from "./pages/Home";
+import { Home, Login, AddEvent, Registration } from "./pages";
 import { Header } from "./components/Header";
 import Container from "@mui/material/Container";
 import { Routes, Route } from 'react-router-dom';
-import { Registration } from "./pages/Registration";
-import { Login } from "./pages/Login";
 import { ErrorPage } from "./pages/ErrorPage";
 
 
@@ -14,7 +12,7 @@ function App() {
         <Container maxWidth="lg">
           <Routes>
             <Route element={<Home />} path="/" />
-            {/*<Route element={<AddPost />} path="/posts/create" />*/}
+            <Route element={<AddEvent />} path="/event/" />
             {/*<Route element={<AddPost />} path="/posts/:id/edit" />*/}
             {/*<Route element={<FullEvent />} path="/event/:eventId" />*/}
             <Route element={<Login />} path="/login" />
