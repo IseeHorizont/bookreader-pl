@@ -18,7 +18,6 @@ export const Home = () => {
     const [events, setEvents] = useState([]);
     const [newEvents, setNewEvents] = useState([]);
     const [ownEvents, setOwnEvents] = useState([]);
-    //const [clientData, setClientData] = useState([]);
 
     let isAuth = localStorage.getItem('token');
 
@@ -35,7 +34,6 @@ export const Home = () => {
             .then((response) => {
                 setEvents(response.data);
             })
-        console.log(events);  // todo
 
         // last 10 the newest events
         axios.get('/event/new', { params: { Limit: 10 } })
@@ -176,8 +174,7 @@ export const Home = () => {
                     {/* todo Auth && own events */}
                     <TabPanel value="3">
                         {ownEvents.length > 0 ? (
-                            <TabPanel value="3">
-                                <Grid container spacing={4}>
+                            <Grid container spacing={4}>
                                     <Grid xs={8} item>
                                         {ownEvents.map((obj, index) => (
                                             <Post
@@ -223,7 +220,6 @@ export const Home = () => {
                                         />
                                     </Grid>
                                 </Grid>
-                            </TabPanel>
                         ) : (
                             <Typography>У Вас ещё нет собственных событий</Typography>
                         )}

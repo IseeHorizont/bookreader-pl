@@ -21,6 +21,7 @@ export const Header = () => {
       //localStorage.removeItem('token');
       localStorage.clear();
       isAuth = null;
+      navigate("/");
       window.location.reload();
   };
 
@@ -42,23 +43,22 @@ export const Header = () => {
             <div className={styles.buttons}>
               {isAuth ? (
                   <>
-                      <Stack direction="row" spacing={3}>
-                        <Link to="/event/">
-                          <Button variant="outlined" color="primary">Создать событие</Button>
-                        </Link>
-                        <Button onClick={onClickLogout} variant="outlined" color="error">Выйти</Button>
-
-                          <StyledBadge
-                              overlap="circular"
-                              anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                              variant="dot"
-                          >
-                              <Avatar src={`${clientBadge}`} />
-                          </StyledBadge>
-                          {/*<Avatar src="/broken-image.jpg" />*/}
+                      <Stack direction="row" spacing={1}>
+                        <Container>
+                            <Link to="/event/">
+                              <Button variant="outlined" color="primary">Создать событие</Button>
+                            </Link>
+                            <Button onClick={onClickLogout} variant="outlined" color="error">Выйти</Button>
+                        </Container>
+                        <StyledBadge
+                            overlap="circular"
+                            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                            variant="dot"
+                        >
+                          <Avatar src={`${clientBadge}`} />
+                        </StyledBadge>
                       </Stack>
                   </>
-
               ) : (
                   <>
                     <Link to="/login">
