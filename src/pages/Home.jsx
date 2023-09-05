@@ -75,19 +75,19 @@ export const Home = () => {
                                 {events.map((obj) => (
                                     <Post
                                         _id={obj.id}
-
-                                        // todo title={obj.description}
-
-                                        book={obj.bookAuthor + ": " + obj.bookTitle}
-                                        imageUrl={obj.eventImage}  //"https://img.freepik.com/premium-vector/people-reading-park_73637-401.jpg?w=2000"
+                                        imageUrl={obj.eventImage}
                                         user={{
                                             avatarUrl: obj.avatar,
                                             fullName: obj.creatorName
                                         }}
-                                        createdAt={obj.createdAt}
+                                        description={obj.description}
+                                        book={obj.bookAuthor + ": " + obj.bookTitle}
+                                        tags={[obj.categoryName]}
+
                                         viewsCount={Math.floor(Math.random() * 50) + 1}
                                         commentsCount={Math.floor(Math.random() * 50) + 1}
-                                        tags={[obj.categoryName]}
+                                        createdAt={obj.createdAt}
+
                                         isEditable={obj.creatorEmail === localStorage.getItem('email')}
                                     />
                                 ))}
@@ -125,18 +125,34 @@ export const Home = () => {
                             <Grid xs={8} item>
                                 {newEvents.map((obj) => (
                                     <Post
+                                        // _id={obj.id}
+                                        // title={obj.description}
+                                        // book={obj.bookAuthor + ": " + obj.bookTitle}
+                                        // imageUrl={obj.eventImage}
+                                        // user={{
+                                        //     avatarUrl: obj.avatar,
+                                        //     fullName: obj.creatorName
+                                        // }}
+                                        // createdAt={obj.createdAt}
+                                        // viewsCount={Math.floor(Math.random() * 50) + 1}
+                                        // commentsCount={Math.floor(Math.random() * 50) + 1}
+                                        // tags={[obj.categoryName]}
+                                        // isEditable={obj.creatorEmail === localStorage.getItem('email')}
+
                                         _id={obj.id}
-                                        title={obj.description}
-                                        book={obj.bookAuthor + ": " + obj.bookTitle}
                                         imageUrl={obj.eventImage}
                                         user={{
                                             avatarUrl: obj.avatar,
                                             fullName: obj.creatorName
                                         }}
-                                        createdAt={obj.createdAt}
+                                        description={obj.description}
+                                        book={obj.bookAuthor + ": " + obj.bookTitle}
+                                        tags={[obj.categoryName]}
+
                                         viewsCount={Math.floor(Math.random() * 50) + 1}
                                         commentsCount={Math.floor(Math.random() * 50) + 1}
-                                        tags={[obj.categoryName]}
+                                        createdAt={obj.createdAt}
+
                                         isEditable={obj.creatorEmail === localStorage.getItem('email')}
                                     />
                                 ))}
@@ -176,18 +192,34 @@ export const Home = () => {
                                     <Grid xs={8} item>
                                         {ownEvents.map((obj) => (
                                             <Post
+                                                // _id={obj.id}
+                                                // title={obj.description}
+                                                // book={obj.bookAuthor + ": " + obj.bookTitle}
+                                                // imageUrl={obj.eventImage}
+                                                // user={{
+                                                //     avatarUrl: obj.avatar,
+                                                //     fullName: obj.creatorName
+                                                // }}
+                                                // createdAt={obj.createdAt}
+                                                // viewsCount={Math.floor(Math.random() * 50) + 1}
+                                                // commentsCount={Math.floor(Math.random() * 50) + 1}
+                                                // tags={[obj.categoryName]}
+                                                // isEditable={obj.creatorEmail === localStorage.getItem('email')}
+
                                                 _id={obj.id}
-                                                title={obj.description}
-                                                book={obj.bookAuthor + ": " + obj.bookTitle}
                                                 imageUrl={obj.eventImage}
                                                 user={{
                                                     avatarUrl: obj.avatar,
                                                     fullName: obj.creatorName
                                                 }}
-                                                createdAt={obj.createdAt}
+                                                description={obj.description}
+                                                book={obj.bookAuthor + ": " + obj.bookTitle}
+                                                tags={[obj.categoryName]}
+
                                                 viewsCount={Math.floor(Math.random() * 50) + 1}
                                                 commentsCount={Math.floor(Math.random() * 50) + 1}
-                                                tags={[obj.categoryName]}
+                                                createdAt={obj.createdAt}
+
                                                 isEditable={obj.creatorEmail === localStorage.getItem('email')}
                                             />
                                         ))}
@@ -248,18 +280,33 @@ export const Home = () => {
                             <Grid xs={8} item>
                                 {events.map((obj) => (
                                     <Post
+                                        // _id={obj.id}
+                                        // title={obj.description}
+                                        // book={obj.bookAuthor + ": " + obj.bookTitle}
+                                        // imageUrl={obj.eventImage}
+                                        // user={{
+                                        //     avatarUrl: obj.avatar,
+                                        //     fullName: obj.creatorName
+                                        // }}
+                                        // createdAt={obj.createdAt}
+                                        // viewsCount={Math.floor(Math.random() * 50) + 1}
+                                        // commentsCount={Math.floor(Math.random() * 50) + 1}
+                                        // tags={[obj.categoryName]}
                                         _id={obj.id}
-                                        title={obj.description}
-                                        book={obj.bookAuthor + ": " + obj.bookTitle}
                                         imageUrl={obj.eventImage}
                                         user={{
                                             avatarUrl: obj.avatar,
                                             fullName: obj.creatorName
                                         }}
-                                        createdAt={obj.createdAt}
+                                        description={obj.description}
+                                        book={obj.bookAuthor + ": " + obj.bookTitle}
+                                        tags={[obj.categoryName]}
+
                                         viewsCount={Math.floor(Math.random() * 50) + 1}
                                         commentsCount={Math.floor(Math.random() * 50) + 1}
-                                        tags={[obj.categoryName]}
+                                        createdAt={obj.createdAt}
+
+                                        isEditable={obj.creatorEmail === localStorage.getItem('email')}
                                     />
                                 ))}
 
@@ -296,18 +343,34 @@ export const Home = () => {
                             <Grid xs={8} item>
                                 {newEvents.map((obj) => (
                                     <Post
+                                        // _id={obj.id}
+                                        // title={obj.description}
+                                        // book={obj.bookAuthor + ": " + obj.bookTitle}
+                                        // imageUrl={obj.eventImage}
+                                        // user={{
+                                        //     avatarUrl: obj.avatar,
+                                        //     fullName: obj.creatorName
+                                        // }}
+                                        // createdAt={obj.createdAt}
+                                        // viewsCount={Math.floor(Math.random() * 50) + 1}
+                                        // commentsCount={Math.floor(Math.random() * 50) + 1}
+                                        // tags={[obj.categoryName]}
+
                                         _id={obj.id}
-                                        title={obj.description}
-                                        book={obj.bookAuthor + ": " + obj.bookTitle}
                                         imageUrl={obj.eventImage}
                                         user={{
                                             avatarUrl: obj.avatar,
                                             fullName: obj.creatorName
                                         }}
-                                        createdAt={obj.createdAt}
+                                        description={obj.description}
+                                        book={obj.bookAuthor + ": " + obj.bookTitle}
+                                        tags={[obj.categoryName]}
+
                                         viewsCount={Math.floor(Math.random() * 50) + 1}
                                         commentsCount={Math.floor(Math.random() * 50) + 1}
-                                        tags={[obj.categoryName]}
+                                        createdAt={obj.createdAt}
+
+                                        isEditable={obj.creatorEmail === localStorage.getItem('email')}
                                     />
                                 ))}
                             </Grid>
