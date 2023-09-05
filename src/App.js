@@ -6,8 +6,6 @@ import { ErrorPage } from "./pages/ErrorPage";
 
 function App() {
 
-  localStorage.clear();
-
   return (
       <>
         <Header />

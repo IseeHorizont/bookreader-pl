@@ -1,6 +1,6 @@
 import React from "react";
 import clsx from "clsx";
-import { Link } from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Clear";
 import EditIcon from "@mui/icons-material/Edit";
@@ -10,9 +10,11 @@ import CommentIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import styles from "./Post.module.scss";
 import { UserInfo } from "../UserInfo";
 import {EventSkeleton} from "./Skeleton";
+import axios from '../../axios';
+
 
 export const Post = ({
-  id,
+  _id,
   title,
   book,
   description,
@@ -28,17 +30,29 @@ export const Post = ({
   isEditable,
 }) => {
 
-  if (isLoading) {
-    return <EventSkeleton />;
-  }
+  // if (isLoading) {
+  //   return <EventSkeleton />;
+  // }
 
-  const onClickRemove = () => {};
+  const onClickRemove = async () => {
+    try {
+      if (window.confirm('Вы действительно хотите удалить это событие?')) {
+        console.log("Home: _id#" + _id);
+        const currentToken = localStorage.getItem('token');
+        await axios.delete('/event/' + _id, {headers: {Authorization: `Bearer ${currentToken}`}});
+        window.location.reload();
+      }
+    } catch (err) {
+      console.log(err);
+      alert('Ошибка удаления события');
+    }
+  };
 
   return (
     <div className={clsx(styles.root, { [styles.rootFull]: isFullEvent })}>
       {isEditable && (
         <div className={styles.editButtons}>
-          <Link to={`/event/${id}`}>
+          <Link to={`/event/${_id}`}>
             <IconButton color="primary">
               <EditIcon />
             </IconButton>
@@ -61,7 +75,7 @@ export const Post = ({
         <div className={styles.indention}>
           <h4 className={clsx(styles.title, { [styles.titleFull]: isFullEvent })}>
             {/*{isFullEvent ? title : <Link to={`/event/${id}`}>{book}</Link>}*/}
-            <Link to={`/event/${id}`}>{book}</Link>
+            <Link to={`/event/${_id}`}>{book}</Link>
           </h4>
           {/*<p className={clsx(styles.title, { [styles.titleFull]: isFullEvent })}>*/}
           {/*  {isFullEvent ? description : t}*/}

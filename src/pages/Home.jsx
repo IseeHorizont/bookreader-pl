@@ -43,7 +43,6 @@ export const Home = () => {
     }, []);
 
     const getOwnEvents = () => {
-        //events by current client
         const currentToken = localStorage.getItem('token');
         axios.get('/event/own/', {headers: { Authorization: `Bearer ${currentToken}`}})
             .then((response) => {
@@ -73,7 +72,7 @@ export const Home = () => {
                     <TabPanel value="1">
                         <Grid container spacing={4}>
                             <Grid xs={8} item>
-                                {events.map((obj, index) => (
+                                {events.map((obj) => (
                                     <Post
                                         _id={obj.id}
 
@@ -92,7 +91,6 @@ export const Home = () => {
                                         isEditable={obj.creatorEmail === localStorage.getItem('email')}
                                     />
                                 ))}
-
                             </Grid>
                             <Grid xs={4} item>
                                 <TagsBlock
@@ -125,9 +123,9 @@ export const Home = () => {
                     <TabPanel value="2">
                         <Grid container spacing={4}>
                             <Grid xs={8} item>
-                                {newEvents.map((obj, index) => (
+                                {newEvents.map((obj) => (
                                     <Post
-                                        id={index}
+                                        _id={obj.id}
                                         title={obj.description}
                                         book={obj.bookAuthor + ": " + obj.bookTitle}
                                         imageUrl={obj.eventImage}
@@ -176,9 +174,9 @@ export const Home = () => {
                         {ownEvents.length > 0 ? (
                             <Grid container spacing={4}>
                                     <Grid xs={8} item>
-                                        {ownEvents.map((obj, index) => (
+                                        {ownEvents.map((obj) => (
                                             <Post
-                                                id={index}
+                                                _id={obj.id}
                                                 title={obj.description}
                                                 book={obj.bookAuthor + ": " + obj.bookTitle}
                                                 imageUrl={obj.eventImage}
@@ -248,9 +246,9 @@ export const Home = () => {
                     <TabPanel value="1">
                         <Grid container spacing={4}>
                             <Grid xs={8} item>
-                                {events.map((obj, index) => (
+                                {events.map((obj) => (
                                     <Post
-                                        id={index}
+                                        _id={obj.id}
                                         title={obj.description}
                                         book={obj.bookAuthor + ": " + obj.bookTitle}
                                         imageUrl={obj.eventImage}
@@ -296,9 +294,9 @@ export const Home = () => {
                     <TabPanel value="2">
                         <Grid container spacing={4}>
                             <Grid xs={8} item>
-                                {newEvents.map((obj, index) => (
+                                {newEvents.map((obj) => (
                                     <Post
-                                        id={index}
+                                        _id={obj.id}
                                         title={obj.description}
                                         book={obj.bookAuthor + ": " + obj.bookTitle}
                                         imageUrl={obj.eventImage}

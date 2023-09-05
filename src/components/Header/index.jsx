@@ -13,7 +13,6 @@ import Stack from "@mui/material/Stack";
 export const Header = () => {
   const navigate = useNavigate();
   let isAuth = localStorage.getItem('token');
-  //let badge = localStorage.getItem('clientAvatar');
   const [clientBadge, setClientBadge] = useState(null);
 
   const onClickLogout = () => {
@@ -24,10 +23,6 @@ export const Header = () => {
       navigate("/");
       window.location.reload();
   };
-
-  // const onClickCreateEvent = () => {
-  //
-  // }
 
   React.useEffect(() => {
       setClientBadge(localStorage.getItem('clientAvatar'));
