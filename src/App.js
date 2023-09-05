@@ -4,8 +4,10 @@ import Container from "@mui/material/Container";
 import { Routes, Route } from 'react-router-dom';
 import { ErrorPage } from "./pages/ErrorPage";
 
-
 function App() {
+
+  localStorage.clear();
+
   return (
       <>
         <Header />

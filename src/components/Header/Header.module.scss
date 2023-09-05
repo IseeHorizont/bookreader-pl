@@ -1,5 +1,5 @@
 .root {
-  background-color: #fff;
+  background-color: whitesmoke; //#f6f6ea;
   padding: 10px 0;
   border-bottom: 1px solid #e0e0e0;
   margin-bottom: 30px;
@@ -11,7 +11,7 @@
 }
 
 .logo {
-  background-color: #ffa08c; //#DC143C;
+  background-color: #ffa08c;
   color: black; //#FFFFFF;
   font-weight: 700;
   line-height: 35px;
@@ -24,6 +24,12 @@
   &:hover {
     background-color: #4361ee;
   }
+}
+
+.mainlogo {
+  line-height: 35px;
+  border-radius: 5px;
+  padding: 0 10px;
 }
 
 .buttons {
