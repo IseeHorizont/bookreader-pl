@@ -10,7 +10,6 @@ $blue: #4361ee;
 
   &:hover {
     border: 1px solid #ffa08c; //$blue;
-  //  box-shadow: 0 0 0 1px $blue;
 
     .editButtons {
       opacity: 1;
@@ -59,7 +58,7 @@ $blue: #4361ee;
 }
 
 .title {
-  font-size: 28px;
+  font-size: 24px;
   margin: 0;
 
   a {
@@ -67,7 +66,8 @@ $blue: #4361ee;
     color: #000;
 
     &:hover {
-      color: $blue;
+      color: #ffa08c; //$blue;
+      opacity: 0.8;
     }
   }
 

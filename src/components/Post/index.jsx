@@ -11,28 +11,28 @@ import styles from "./Post.module.scss";
 import { UserInfo } from "../UserInfo";
 import {EventSkeleton} from "./Skeleton";
 import axios from '../../axios';
+import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
+import {Card, CardContent} from "@mui/material";
 
 
 export const Post = ({
-  _id,
-  title,
-  book,
-  description,
-  createdAt,
-  imageUrl,
-  user,
-  viewsCount,
-  commentsCount,
-  tags,
+  _id,            // 'id'
+  imageUrl,       // 'eventImage'
+  user,           // 'avatar' & creatorName
+  description,    // 'description'
+  book,           // 'bookAuthor': 'bookTitle'
+  tags,           // 'categoryName'
+  viewsCount,     //
+  commentsCount,  //
+  createdAt,      // 'createdAt'
+  isEditable,     // does he have rights for editing?
+
+  // todo unused fields
   children,
   isFullEvent,
-  isLoading,
-  isEditable,
-}) => {
 
-  // if (isLoading) {
-  //   return <EventSkeleton />;
-  // }
+}) => {
 
   const onClickRemove = async () => {
     try {
@@ -66,20 +66,25 @@ export const Post = ({
         <img
           className={clsx(styles.image, { [styles.imageFull]: isFullEvent })}
           src={imageUrl}
-          alt={title}
+          alt={description}
         />
       )}
       <div className={styles.wrapper}>
         <UserInfo {...user} additionalText={createdAt} />
 
         <div className={styles.indention}>
-          <h4 className={clsx(styles.title, { [styles.titleFull]: isFullEvent })}>
-            {/*{isFullEvent ? title : <Link to={`/event/${id}`}>{book}</Link>}*/}
-            <Link to={`/event/${_id}`}>{book}</Link>
-          </h4>
-          {/*<p className={clsx(styles.title, { [styles.titleFull]: isFullEvent })}>*/}
-          {/*  {isFullEvent ? description : t}*/}
-          {/*</p>*/}
+          <Card className={styles.card}>
+            <CardContent>
+              <h3 className={styles.title}>
+                <Link
+                    color="primary"
+                    style={{ textDecoration: 'none'}}
+                    to={`/event/${_id}`}>{ book }
+                </Link>
+              </h3>
+              {(description) ? (<Typography><i>{ description }</i></Typography>) : ('')}
+            </CardContent>
+          </Card>
 
           <ul className={styles.tags}>
             {tags.map((name) => (
