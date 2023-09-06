@@ -32,12 +32,9 @@ export const Header = () => {
       <div className={styles.root}>
         <Container maxWidth="lg">
           <div className={styles.inner}>
-
-            {/*<img src={require('./app-logo.png')} width="180" height="50"/>*/}
             <Link className={styles.logo} to="/">
               <div>LET's READ TOGETHER</div>
             </Link>
-
 
             <div className={styles.buttons}>
               {isAuth ? (

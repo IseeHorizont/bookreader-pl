@@ -1,6 +1,6 @@
 import React from "react";
 import clsx from "clsx";
-import {Link, useNavigate} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Clear";
 import EditIcon from "@mui/icons-material/Edit";
@@ -9,17 +9,19 @@ import CommentIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 
 import styles from "./Post.module.scss";
 import { UserInfo } from "../UserInfo";
-import {EventSkeleton} from "./Skeleton";
+import { EventSkeleton } from "./Skeleton";
 import axios from '../../axios';
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
-import {Card, CardContent} from "@mui/material";
+import { Card, CardContent } from "@mui/material";
+
 
 
 export const Post = ({
   _id,            // 'id'
   imageUrl,       // 'eventImage'
   user,           // 'avatar' & creatorName
+  title,     // 'eventTitle'
   description,    // 'description'
   book,           // 'bookAuthor': 'bookTitle'
   tags,           // 'categoryName'
@@ -28,11 +30,19 @@ export const Post = ({
   createdAt,      // 'createdAt'
   isEditable,     // does he have rights for editing?
 
+  isAuth,         // is user authenticated ?
+  isLoading,      //
+
   // todo unused fields
   children,
   isFullEvent,
 
+
 }) => {
+
+  if (isLoading) {
+    return <EventSkeleton />;
+  }
 
   const onClickRemove = async () => {
     try {
@@ -73,16 +83,32 @@ export const Post = ({
         <UserInfo {...user} additionalText={createdAt} />
 
         <div className={styles.indention}>
-          <Card className={styles.card}>
+          <Card>
             <CardContent>
-              <h3 className={styles.title}>
-                <Link
-                    color="primary"
-                    style={{ textDecoration: 'none'}}
-                    to={`/event/${_id}`}>{ book }
-                </Link>
-              </h3>
-              {(description) ? (<Typography><i>{ description }</i></Typography>) : ('')}
+              {(title) ? (
+                  <>
+                    <h3 className={styles.title}>{ title }</h3>
+                    <br/>
+                    <hr align="left" width="500" size="2" color="#ffa08c" />
+                    <br/>
+                  </>
+              ) : ('')}
+              {isAuth ? (
+                <h3 className={styles.title}>
+                    <Link
+                        color="primary"
+                        style={{ textDecoration: 'none'}}
+                        to={'/event/' + _id}>{ book }
+                    </Link>
+
+                </h3>
+                ) : (
+                  <h3 className={styles.title}>
+                    { book }
+                  </h3>
+                )
+              }
+              {(description) ? (<Typography>{ description }</Typography>) : ('')}
             </CardContent>
           </Card>
 

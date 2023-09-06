@@ -89,6 +89,8 @@ export const Home = () => {
                                         createdAt={obj.createdAt}
 
                                         isEditable={obj.creatorEmail === localStorage.getItem('email')}
+                                        isAuth={isAuth}
+                                        //isLoading={obj}
                                     />
                                 ))}
                             </Grid>
@@ -125,20 +127,6 @@ export const Home = () => {
                             <Grid xs={8} item>
                                 {newEvents.map((obj) => (
                                     <Post
-                                        // _id={obj.id}
-                                        // title={obj.description}
-                                        // book={obj.bookAuthor + ": " + obj.bookTitle}
-                                        // imageUrl={obj.eventImage}
-                                        // user={{
-                                        //     avatarUrl: obj.avatar,
-                                        //     fullName: obj.creatorName
-                                        // }}
-                                        // createdAt={obj.createdAt}
-                                        // viewsCount={Math.floor(Math.random() * 50) + 1}
-                                        // commentsCount={Math.floor(Math.random() * 50) + 1}
-                                        // tags={[obj.categoryName]}
-                                        // isEditable={obj.creatorEmail === localStorage.getItem('email')}
-
                                         _id={obj.id}
                                         imageUrl={obj.eventImage}
                                         user={{
@@ -154,6 +142,7 @@ export const Home = () => {
                                         createdAt={obj.createdAt}
 
                                         isEditable={obj.creatorEmail === localStorage.getItem('email')}
+                                        isAuth={isAuth}
                                     />
                                 ))}
                             </Grid>
@@ -192,20 +181,6 @@ export const Home = () => {
                                     <Grid xs={8} item>
                                         {ownEvents.map((obj) => (
                                             <Post
-                                                // _id={obj.id}
-                                                // title={obj.description}
-                                                // book={obj.bookAuthor + ": " + obj.bookTitle}
-                                                // imageUrl={obj.eventImage}
-                                                // user={{
-                                                //     avatarUrl: obj.avatar,
-                                                //     fullName: obj.creatorName
-                                                // }}
-                                                // createdAt={obj.createdAt}
-                                                // viewsCount={Math.floor(Math.random() * 50) + 1}
-                                                // commentsCount={Math.floor(Math.random() * 50) + 1}
-                                                // tags={[obj.categoryName]}
-                                                // isEditable={obj.creatorEmail === localStorage.getItem('email')}
-
                                                 _id={obj.id}
                                                 imageUrl={obj.eventImage}
                                                 user={{
@@ -221,6 +196,7 @@ export const Home = () => {
                                                 createdAt={obj.createdAt}
 
                                                 isEditable={obj.creatorEmail === localStorage.getItem('email')}
+                                                isAuth={isAuth}
                                             />
                                         ))}
                                     </Grid>
@@ -280,18 +256,6 @@ export const Home = () => {
                             <Grid xs={8} item>
                                 {events.map((obj) => (
                                     <Post
-                                        // _id={obj.id}
-                                        // title={obj.description}
-                                        // book={obj.bookAuthor + ": " + obj.bookTitle}
-                                        // imageUrl={obj.eventImage}
-                                        // user={{
-                                        //     avatarUrl: obj.avatar,
-                                        //     fullName: obj.creatorName
-                                        // }}
-                                        // createdAt={obj.createdAt}
-                                        // viewsCount={Math.floor(Math.random() * 50) + 1}
-                                        // commentsCount={Math.floor(Math.random() * 50) + 1}
-                                        // tags={[obj.categoryName]}
                                         _id={obj.id}
                                         imageUrl={obj.eventImage}
                                         user={{
