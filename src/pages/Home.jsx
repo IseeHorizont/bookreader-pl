@@ -18,6 +18,7 @@ export const Home = () => {
     const [events, setEvents] = useState([]);
     const [newEvents, setNewEvents] = useState([]);
     const [ownEvents, setOwnEvents] = useState([]);
+    const [tags, setTags] = useState([]);
 
     let isAuth = localStorage.getItem('token');
 
@@ -40,6 +41,12 @@ export const Home = () => {
             .then((response) => {
                 setNewEvents(response.data);
             })
+
+        axios.get('/tags/popular', { params: { limit: 3 } })
+            .then((response) => {
+                setTags(response.data);
+            })
+
     }, []);
 
     const getOwnEvents = () => {
@@ -96,8 +103,8 @@ export const Home = () => {
                             </Grid>
                             <Grid xs={4} item>
                                 <TagsBlock
-                                    items={["bestseller", "fun", "historic"]}
-                                    isLoading={false}
+                                    items={tags}
+                                    isLoading={tags.length === 0}
                                 />
                                 <CommentsBlock
                                     items={[
@@ -149,8 +156,8 @@ export const Home = () => {
 
                             <Grid xs={4} item>
                                 <TagsBlock
-                                    items={["bestseller", "fun", "historic"]}
-                                    isLoading={false}
+                                    items={tags}
+                                    isLoading={tags.length === 0}
                                 />
                                 <CommentsBlock
                                     items={[
@@ -202,8 +209,8 @@ export const Home = () => {
                                     </Grid>
                                     <Grid xs={4} item>
                                         <TagsBlock
-                                            items={["bestseller", "fun", "historic"]}
-                                            isLoading={false}
+                                            items={tags}
+                                            isLoading={tags.length === 0}
                                         />
                                         <CommentsBlock
                                             items={[
@@ -277,8 +284,8 @@ export const Home = () => {
                             </Grid>
                             <Grid xs={4} item>
                                 <TagsBlock
-                                    items={["bestseller", "fun", "historic"]}
-                                    isLoading={false}
+                                    items={tags}
+                                    isLoading={tags.length === 0}
                                 />
                                 <CommentsBlock
                                     items={[
@@ -307,19 +314,6 @@ export const Home = () => {
                             <Grid xs={8} item>
                                 {newEvents.map((obj) => (
                                     <Post
-                                        // _id={obj.id}
-                                        // title={obj.description}
-                                        // book={obj.bookAuthor + ": " + obj.bookTitle}
-                                        // imageUrl={obj.eventImage}
-                                        // user={{
-                                        //     avatarUrl: obj.avatar,
-                                        //     fullName: obj.creatorName
-                                        // }}
-                                        // createdAt={obj.createdAt}
-                                        // viewsCount={Math.floor(Math.random() * 50) + 1}
-                                        // commentsCount={Math.floor(Math.random() * 50) + 1}
-                                        // tags={[obj.categoryName]}
-
                                         _id={obj.id}
                                         imageUrl={obj.eventImage}
                                         user={{
@@ -341,8 +335,8 @@ export const Home = () => {
 
                             <Grid xs={4} item>
                                 <TagsBlock
-                                    items={["bestseller", "fun", "historic"]}
-                                    isLoading={false}
+                                    items={tags}
+                                    isLoading={tags.length === 0}
                                 />
                                 <CommentsBlock
                                     items={[

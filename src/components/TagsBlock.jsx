@@ -9,16 +9,26 @@ import ListItemText from "@mui/material/ListItemText";
 import Skeleton from "@mui/material/Skeleton";
 
 import { SideBlock } from "./SideBlock";
+import axios from "../axios";
 
 export const TagsBlock = ({ items, isLoading = true }) => {
+
+  //const doFilter = () => {
+        // const currentToken = localStorage.getItem('token');
+        // axios.get('/event/own/', {headers: { Authorization: `Bearer ${currentToken}`}})
+        //     .then((response) => {
+        //         setOwnEvents(response.data);
+        //     });
+  //}
+
   return (
-    <SideBlock title="Тэги">
+    <SideBlock title="Популярное">
       <List>
-        {(isLoading ? [...Array(5)] : items).map((name, i) => (
-          <a
-            style={{ textDecoration: "none", color: "black" }}
-            href={`/tags/${name}`}
-          >
+        {(isLoading ? [...Array(3)] : items).map((name, i) => (
+          // <a
+          //   style={{ textDecoration: "none", color: "black" }}
+          //   href={`/tags/${name}`}
+          // >
             <ListItem key={i} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
@@ -31,7 +41,7 @@ export const TagsBlock = ({ items, isLoading = true }) => {
                 )}
               </ListItemButton>
             </ListItem>
-          </a>
+          //</a>
         ))}
       </List>
     </SideBlock>
