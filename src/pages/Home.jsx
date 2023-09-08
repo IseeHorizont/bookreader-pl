@@ -11,6 +11,17 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import axios from '../axios';
 import Typography from "@mui/material/Typography";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import TagIcon from "@mui/icons-material/Tag";
+import Skeleton from "@mui/material/Skeleton";
+import ListItemText from "@mui/material/ListItemText";
+import {SideBlock} from "../components/SideBlock";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import Container from "@mui/material/Container";
 
 export const Home = () => {
 
@@ -29,12 +40,29 @@ export const Home = () => {
         }
     };
 
-    React.useEffect(() => {
-        // all public events
+    function filterByCategory(name) {
+        //axios.get('/event/filter' + `?categoryName=${name}`)
+        axios.get('/event/filter', { params: { categoryName: name } })
+            .then((response) => {
+                setEvents(response.data);
+            })
+    }
+
+    function getAllEvents() {
         axios.get('/event/')
             .then((response) => {
                 setEvents(response.data);
             })
+    }
+
+    React.useEffect(() => {
+        // all public events
+        if (events.length === 0) {
+            axios.get('/event/')
+                .then((response) => {
+                    setEvents(response.data);
+                })
+        }
 
         // last 10 the newest events
         axios.get('/event/new', { params: { Limit: 10 } })
@@ -102,10 +130,46 @@ export const Home = () => {
                                 ))}
                             </Grid>
                             <Grid xs={4} item>
-                                <TagsBlock
-                                    items={tags}
-                                    isLoading={tags.length === 0}
-                                />
+                                <SideBlock title="Популярное">
+                                    <List>
+                                        {(tags.length === 0 ? [...Array(3)] : tags).map((name) => (
+                                            <a
+                                                style={{ textDecoration: "none", color: "black" }}
+                                                href="#" onClick={() => filterByCategory(name)}
+                                            >
+                                                <ListItem disablePadding>
+                                                    <ListItemButton>
+                                                        <ListItemIcon>
+                                                            <TagIcon />
+                                                        </ListItemIcon>
+                                                        {tags.length === 0 ? (
+                                                            <Skeleton width={100} />
+                                                        ) : (
+                                                            <ListItemText primary={name} />
+                                                        )}
+                                                    </ListItemButton>
+                                                </ListItem>
+                                            </a>
+                                        ))}
+                                        <a
+                                            style={{ textDecoration: "none", color: "black" }}
+                                            href="#" onClick={() => getAllEvents()}
+                                        >
+                                            <ListItem disablePadding>
+                                                <ListItemButton>
+                                                    <ListItemIcon>
+                                                        <TagIcon />
+                                                    </ListItemIcon>
+                                                    {tags.length === 0 ? (
+                                                        <Skeleton width={100} />
+                                                    ) : (
+                                                        <ListItemText primary={"Все"} />
+                                                    )}
+                                                </ListItemButton>
+                                            </ListItem>
+                                        </a>
+                                    </List>
+                                </SideBlock>
                                 <CommentsBlock
                                     items={[
                                         {
@@ -155,10 +219,6 @@ export const Home = () => {
                             </Grid>
 
                             <Grid xs={4} item>
-                                <TagsBlock
-                                    items={tags}
-                                    isLoading={tags.length === 0}
-                                />
                                 <CommentsBlock
                                     items={[
                                         {
@@ -208,10 +268,6 @@ export const Home = () => {
                                         ))}
                                     </Grid>
                                     <Grid xs={4} item>
-                                        <TagsBlock
-                                            items={tags}
-                                            isLoading={tags.length === 0}
-                                        />
                                         <CommentsBlock
                                             items={[
                                                 {
@@ -283,10 +339,46 @@ export const Home = () => {
 
                             </Grid>
                             <Grid xs={4} item>
-                                <TagsBlock
-                                    items={tags}
-                                    isLoading={tags.length === 0}
-                                />
+                                <SideBlock title="Популярное">
+                                    <List>
+                                        {(tags.length === 0 ? [...Array(3)] : tags).map((name) => (
+                                            <a
+                                                style={{ textDecoration: "none", color: "black" }}
+                                                href="#" onClick={() => filterByCategory(name)}
+                                            >
+                                                <ListItem disablePadding>
+                                                    <ListItemButton>
+                                                        <ListItemIcon>
+                                                            <TagIcon />
+                                                        </ListItemIcon>
+                                                        {tags.length === 0 ? (
+                                                            <Skeleton width={100} />
+                                                        ) : (
+                                                            <ListItemText primary={name} />
+                                                        )}
+                                                    </ListItemButton>
+                                                </ListItem>
+                                            </a>
+                                        ))}
+                                        <a
+                                            style={{ textDecoration: "none", color: "black" }}
+                                            href="#" onClick={() => getAllEvents()}
+                                        >
+                                            <ListItem disablePadding>
+                                                <ListItemButton>
+                                                    <ListItemIcon>
+                                                        <TagIcon />
+                                                    </ListItemIcon>
+                                                    {tags.length === 0 ? (
+                                                        <Skeleton width={100} />
+                                                    ) : (
+                                                        <ListItemText primary={"Все"} />
+                                                    )}
+                                                </ListItemButton>
+                                            </ListItem>
+                                        </a>
+                                    </List>
+                                </SideBlock>
                                 <CommentsBlock
                                     items={[
                                         {
@@ -332,12 +424,7 @@ export const Home = () => {
                                     />
                                 ))}
                             </Grid>
-
                             <Grid xs={4} item>
-                                <TagsBlock
-                                    items={tags}
-                                    isLoading={tags.length === 0}
-                                />
                                 <CommentsBlock
                                     items={[
                                         {

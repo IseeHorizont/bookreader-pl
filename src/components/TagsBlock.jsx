@@ -13,14 +13,6 @@ import axios from "../axios";
 
 export const TagsBlock = ({ items, isLoading = true }) => {
 
-  //const doFilter = () => {
-        // const currentToken = localStorage.getItem('token');
-        // axios.get('/event/own/', {headers: { Authorization: `Bearer ${currentToken}`}})
-        //     .then((response) => {
-        //         setOwnEvents(response.data);
-        //     });
-  //}
-
   return (
     <SideBlock title="Популярное">
       <List>
