@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
-//import Tabs from '@mui/material/Tabs';
 import Grid from '@mui/material/Grid';
 import { Post } from "../components/Post";
-import { TagsBlock } from "../components/TagsBlock";
 import { CommentsBlock } from "../components/CommentsBlock";
 import {Box} from "@mui/material";
 import Tab from '@mui/material/Tab';
@@ -19,9 +17,6 @@ import TagIcon from "@mui/icons-material/Tag";
 import Skeleton from "@mui/material/Skeleton";
 import ListItemText from "@mui/material/ListItemText";
 import {SideBlock} from "../components/SideBlock";
-import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
-import Container from "@mui/material/Container";
 
 export const Home = () => {
 
@@ -30,6 +25,7 @@ export const Home = () => {
     const [newEvents, setNewEvents] = useState([]);
     const [ownEvents, setOwnEvents] = useState([]);
     const [tags, setTags] = useState([]);
+    const [eventRating, setEventRating] = useState([]);
 
     let isAuth = localStorage.getItem('token');
 
@@ -41,7 +37,6 @@ export const Home = () => {
     };
 
     function filterByCategory(name) {
-        //axios.get('/event/filter' + `?categoryName=${name}`)
         axios.get('/event/filter', { params: { categoryName: name } })
             .then((response) => {
                 setEvents(response.data);
@@ -75,6 +70,11 @@ export const Home = () => {
                 setTags(response.data);
             })
 
+        axios.get('/rating/')
+            .then((response) => {
+                setEventRating(response.data);
+            })
+
     }, []);
 
     const getOwnEvents = () => {
@@ -83,6 +83,26 @@ export const Home = () => {
             .then((response) => {
                 setOwnEvents(response.data);
             });
+    }
+
+    // rating: likeCounter by eventId
+    const getLikesByEventId = (eventId) => {
+        for (let index in eventRating) {
+            if (eventRating[index].eventId === eventId) {
+                return eventRating[index].likeCounter;
+            }
+        }
+        return 0;
+    }
+
+    // rating: dislikeCounter by eventId
+    const getDislikesByEventId = (eventId) => {
+        for (let index in eventRating) {
+            if (eventRating[index].eventId === eventId) {
+                return eventRating[index].dislikeCounter;
+            }
+        }
+        return 0;
     }
 
     return (
@@ -110,6 +130,7 @@ export const Home = () => {
                                 {events.map((obj) => (
                                     <Post
                                         _id={obj.id}
+
                                         imageUrl={obj.eventImage}
                                         user={{
                                             avatarUrl: obj.avatar,
@@ -126,6 +147,9 @@ export const Home = () => {
                                         isEditable={obj.creatorEmail === localStorage.getItem('email')}
                                         isAuth={isAuth}
                                         //isLoading={obj}
+
+                                        likes={getLikesByEventId(obj.id)}
+                                        dislikes={getDislikesByEventId(obj.id)}
                                     />
                                 ))}
                             </Grid>
@@ -214,6 +238,9 @@ export const Home = () => {
 
                                         isEditable={obj.creatorEmail === localStorage.getItem('email')}
                                         isAuth={isAuth}
+
+                                        likes={getLikesByEventId(obj.id)}
+                                        dislikes={getDislikesByEventId(obj.id)}
                                     />
                                 ))}
                             </Grid>
@@ -264,6 +291,9 @@ export const Home = () => {
 
                                                 isEditable={obj.creatorEmail === localStorage.getItem('email')}
                                                 isAuth={isAuth}
+
+                                                likes={getLikesByEventId(obj.id)}
+                                                dislikes={getDislikesByEventId(obj.id)}
                                             />
                                         ))}
                                     </Grid>
@@ -334,6 +364,9 @@ export const Home = () => {
                                         createdAt={obj.createdAt}
 
                                         isEditable={obj.creatorEmail === localStorage.getItem('email')}
+
+                                        likes={getLikesByEventId(obj.id)}
+                                        dislikes={getDislikesByEventId(obj.id)}
                                     />
                                 ))}
 
@@ -421,6 +454,9 @@ export const Home = () => {
                                         createdAt={obj.createdAt}
 
                                         isEditable={obj.creatorEmail === localStorage.getItem('email')}
+
+                                        likes={getLikesByEventId(obj.id)}
+                                        dislikes={getDislikesByEventId(obj.id)}
                                     />
                                 ))}
                             </Grid>

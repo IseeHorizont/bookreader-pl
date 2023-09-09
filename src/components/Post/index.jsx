@@ -6,13 +6,14 @@ import DeleteIcon from "@mui/icons-material/Clear";
 import EditIcon from "@mui/icons-material/Edit";
 import EyeIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import CommentIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
+import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 
 import styles from "./Post.module.scss";
 import { UserInfo } from "../UserInfo";
 import { EventSkeleton } from "./Skeleton";
 import axios from '../../axios';
 import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
 import { Card, CardContent } from "@mui/material";
 
 
@@ -32,6 +33,9 @@ export const Post = ({
 
   isAuth,         // is user authenticated ?
   isLoading,      //
+
+  likes,          // all likes
+  dislikes,       // all dislikes
 
   // todo unused fields
   children,
@@ -116,11 +120,10 @@ export const Post = ({
             {tags.map((name) => (
               <li key={name}>
                 # {name}
-                {/* todo <Link to={`/tag/${name}`}>#{name}</Link>*/}
               </li>
             ))}
           </ul>
-          {children && <div className={styles.content}>{children}</div>}
+          {children && <div className={styles.content}>{children}</div>}          {/* todo  what's this?? */}
           <ul className={styles.postDetails}>
             <li>
               <EyeIcon />
@@ -129,6 +132,14 @@ export const Post = ({
             <li>
               <CommentIcon />
               <span>{commentsCount}</span>
+            </li>
+            <li>
+              <SentimentVerySatisfiedIcon />
+              <span>{!likes ? (0) : likes}</span>
+            </li>
+            <li>
+              <SentimentVeryDissatisfiedIcon />
+              <span>{!dislikes ? (0) : dislikes}</span>
             </li>
           </ul>
         </div>
