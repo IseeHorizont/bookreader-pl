@@ -15,7 +15,12 @@ import { EventSkeleton } from "./Skeleton";
 import axios from '../../axios';
 import Typography from "@mui/material/Typography";
 import { Card, CardContent } from "@mui/material";
+import Stack from "@mui/material/Stack";
 
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
 
 
 export const Post = ({
@@ -61,6 +66,38 @@ export const Post = ({
       alert('Ошибка удаления события');
     }
   };
+
+  // todo !!!!!!!!!!!!!!!!!!!!!
+  // async function clickOnLike() {
+  //   try {
+  //     await axios.post('/rating/', {
+  //           eventId: _id,
+  //           creatorEmail: ${localStorage.getItem('email')},
+  //           vote: 'LIKE'
+  //         }, {
+  //           headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
+  //         }
+  //     );
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+
+  // todo !!!!!!!!!!!!!!!!!!!!!
+  // async function clickOnDislike() {
+  //   try {
+  //     await axios.post('/rating/', {
+  //           eventId: _id,
+  //           creatorEmail: ${localStorage.getItem('email')},
+  //           vote: 'DISLIKE'
+  //         }, {
+  //           headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
+  //         }
+  //     );
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
   return (
     <div className={clsx(styles.root, { [styles.rootFull]: isFullEvent })}>
@@ -116,7 +153,7 @@ export const Post = ({
             </CardContent>
           </Card>
 
-          <ul className={styles.tags}>
+          <ul className={clsx(styles.tags, { [styles.tagsFull]: isFullEvent })}>
             {tags.map((name) => (
               <li key={name}>
                 # {name}
@@ -124,24 +161,60 @@ export const Post = ({
             ))}
           </ul>
           {children && <div className={styles.content}>{children}</div>}          {/* todo  what's this?? */}
-          <ul className={styles.postDetails}>
-            <li>
-              <EyeIcon />
-              <span>{viewsCount}</span>
-            </li>
-            <li>
-              <CommentIcon />
-              <span>{commentsCount}</span>
-            </li>
-            <li>
-              <SentimentVerySatisfiedIcon />
-              <span>{!likes ? (0) : likes}</span>
-            </li>
-            <li>
-              <SentimentVeryDissatisfiedIcon />
-              <span>{!dislikes ? (0) : dislikes}</span>
-            </li>
-          </ul>
+
+          {isFullEvent ? (
+              <Grid container direction="row" justifyContent="space-between" alignItems="baseline">
+                <Grid>
+                  <ul className={clsx(styles.postDetails, { [styles.postDetailsFull]: isFullEvent })}>
+                    <li>
+                      <EyeIcon />
+                      <span>{viewsCount}</span>
+                    </li>
+                    <li>
+                      <CommentIcon />
+                      <span>{commentsCount}</span>
+                    </li>
+                    <li>
+                      <SentimentVerySatisfiedIcon />
+                      <span>{!likes ? (0) : likes}</span>
+                    </li>
+                    <li>
+                      <SentimentVeryDissatisfiedIcon />
+                      <span>{!dislikes ? (0) : dislikes}</span>
+                    </li>
+                  </ul>
+                </Grid>
+                <Grid >
+                  <IconButton className={styles.voteButtons}>
+                    <ThumbUpIcon />
+                    <span>{!likes ? (0) : likes}</span>
+                  </IconButton>
+                  <IconButton className={styles.voteButtons}>
+                    <ThumbDownIcon />
+                    <span>{!dislikes ? (0) : dislikes}</span>
+                  </IconButton>
+                </Grid>
+              </Grid>
+          ) : (
+              <ul className={clsx(styles.postDetails, { [styles.postDetailsFull]: isFullEvent })}>
+                <li>
+                  <EyeIcon />
+                  <span>{viewsCount}</span>
+                </li>
+                <li>
+                  <CommentIcon />
+                  <span>{commentsCount}</span>
+                </li>
+                <li>
+                  <SentimentVerySatisfiedIcon />
+                  <span>{!likes ? (0) : likes}</span>
+                </li>
+                <li>
+                  <SentimentVeryDissatisfiedIcon />
+                  <span>{!dislikes ? (0) : dislikes}</span>
+                </li>
+              </ul>
+          )}
         </div>
       </div>
     </div>
