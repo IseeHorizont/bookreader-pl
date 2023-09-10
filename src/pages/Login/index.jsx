@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 
 export const Login = () => {
-    //const [token, setToken] = useState('');
+
     const navigate = useNavigate();
 
     const {
@@ -32,6 +32,7 @@ export const Login = () => {
         try {
             const { data } = await axios.post('/auth/authenticate', creds);
             window.localStorage.setItem('token', data.token);
+            window.localStorage.setItem('role', data.role);
             window.localStorage.setItem('email', creds.email);
 
             axios.get('/client/badge',
@@ -40,7 +41,7 @@ export const Login = () => {
                 )
                 .then((response) => {
                     localStorage.setItem('clientAvatar', response.data.avatarImageUrl);
-                    console.log(localStorage.getItem('clientAvatar'));                  // todo
+                    console.log(localStorage.getItem('clientAvatar'));
                 })
             navigate('/');
         } catch (error) {
