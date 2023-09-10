@@ -1,4 +1,4 @@
-import { Home, Login, AddEvent, Registration, FullEvent } from "./pages";
+import {Home, Login, AddEvent, Registration, FullEvent, AdminRoom} from "./pages";
 import { Header } from "./components/Header";
 import Container from "@mui/material/Container";
 import { Routes, Route } from 'react-router-dom';
@@ -16,6 +16,7 @@ function App() {
             <Route element={<FullEvent />} path="/event/:eventId" />
             <Route element={<Login />} path="/login" />
             <Route element={<Registration />} path="/register" />
+            <Route element={<AdminRoom />} path="/statistics" />
             <Route path="*" element={<ErrorPage />} />
           </Routes>
         </Container>

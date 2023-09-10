@@ -5,11 +5,16 @@ import styles from './Header.module.scss';
 import Container from '@mui/material/Container';
 import Avatar from "@mui/material/Avatar";
 import {Box, Chip} from "@mui/material";
+import clsx from "clsx";
 
 
 export const Header = () => {
   const navigate = useNavigate();
   let isAuth = localStorage.getItem('token');
+  let isAdmin = localStorage.getItem('role') === 'ADMIN';
+
+  //console.log('isAdmin: ' + isAdmin); // todo ?????
+
   const [clientBadge, setClientBadge] = useState(null);
   const [clientName, setClientName] = useState('');
 
@@ -28,9 +33,21 @@ export const Header = () => {
       <div className={styles.root}>
         <Container maxWidth="lg">
           <div className={styles.inner}>
-            <Link className={styles.logo} to="/">
-              <div>LET's READ TOGETHER</div>
-            </Link>
+            {isAdmin ? (
+              <>
+                <Link className={styles.logo} to="/">
+                  <div>LET's READ TOGETHER</div>
+                </Link>
+                <Link className={styles.admin} to="/statistics">
+                  <div>STATISTICS</div>
+                </Link>
+              </>
+              ) : (
+                <Link className={styles.logo} to="/">
+                  <div>LET's READ TOGETHER</div>
+                </Link>
+              )}
+
             <div className={styles.buttons}>
               {isAuth ? (
                   <>

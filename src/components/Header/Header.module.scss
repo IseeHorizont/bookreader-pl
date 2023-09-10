@@ -12,6 +12,7 @@
 
 .logo {
   background-color: #ffa08c;
+  border: 1px double black; // solid;
   color: black;
   font-weight: 700;
   line-height: 35px;
@@ -22,7 +23,11 @@
   text-decoration: none;
 
   &:hover {
-    background-color: #4361ee;
+    background-color: bisque;
+  }
+
+  :active {
+    color: green;
   }
 }
 
@@ -35,5 +40,26 @@
 .buttons {
   button {
     margin-left: 10px;
+  }
+}
+
+.admin {
+  visibility: visible;
+  border: 1px double black; // solid;
+  color: black;
+  font-weight: 700;
+  line-height: 35px;
+  text-transform: uppercase;
+  letter-spacing: 0.15px;
+  border-radius: 5px;
+  padding: 0 10px;
+  text-decoration: none;
+
+  &:hover {
+    background-color: bisque;
+  }
+
+  :active {
+    color: green;
   }
 }
