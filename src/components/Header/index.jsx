@@ -1,31 +1,27 @@
 import React, {useEffect, useState} from 'react';
-//import { useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
 import {Link, useNavigate} from 'react-router-dom';
-
 import styles from './Header.module.scss';
 import Container from '@mui/material/Container';
-import {StyledBadge} from "../StyledBadge";
 import Avatar from "@mui/material/Avatar";
-import Stack from "@mui/material/Stack";
+import {Chip} from "@mui/material";
 
 
 export const Header = () => {
   const navigate = useNavigate();
   let isAuth = localStorage.getItem('token');
   const [clientBadge, setClientBadge] = useState(null);
+  const [clientName, setClientName] = useState('');
 
   const onClickLogout = () => {
-      //localStorage.token = 'default';
-      //localStorage.removeItem('token');
       localStorage.clear();
       isAuth = null;
       navigate("/");
-      window.location.reload();
   };
 
   React.useEffect(() => {
       setClientBadge(localStorage.getItem('clientAvatar'));
+      setClientName(localStorage.getItem('email'));
   }, []);
 
   return (
@@ -39,21 +35,18 @@ export const Header = () => {
             <div className={styles.buttons}>
               {isAuth ? (
                   <>
-                      <Stack direction="row" spacing={1}>
-                        <Container>
-                            <Link to="/event/">
-                              <Button variant="outlined" color="primary">Создать событие</Button>
-                            </Link>
-                            <Button onClick={onClickLogout} variant="outlined" color="error">Выйти</Button>
-                        </Container>
-                        <StyledBadge
-                            overlap="circular"
-                            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                            variant="dot"
-                        >
-                          <Avatar src={`${clientBadge}`} />
-                        </StyledBadge>
-                      </Stack>
+                    <Container>
+                      <Chip
+                        color='success'
+                        avatar={<Avatar alt="U" src={`${clientBadge}`}  />}
+                        label={clientName ? (`${clientName}`) : ('Не узнаю Вас в гриме...')}
+                        variant="outlined"
+                      />
+                      <Link to="/event/">
+                        <Button variant="outlined" color="primary">Создать событие</Button>
+                      </Link>
+                      <Button onClick={onClickLogout} variant="outlined" color="error">Выйти</Button>
+                    </Container>
                   </>
               ) : (
                   <>

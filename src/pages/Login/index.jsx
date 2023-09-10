@@ -33,7 +33,7 @@ export const Login = () => {
             const { data } = await axios.post('/auth/authenticate', creds);
             window.localStorage.setItem('token', data.token);
             window.localStorage.setItem('email', creds.email);
-            // todo get & save user's avatar
+
             axios.get('/client/badge',
                 { headers: { Authorization: `Bearer ${data.token}`},
                           params: { username: `${creds.email}` } }
