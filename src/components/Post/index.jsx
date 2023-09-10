@@ -170,14 +170,6 @@ export const Post = ({
                       <CommentIcon />
                       <span>{commentsCount}</span>
                     </li>
-                    <li>
-                      <SentimentVerySatisfiedIcon />
-                      <span>{!likes ? (0) : likes}</span>
-                    </li>
-                    <li>
-                      <SentimentVeryDissatisfiedIcon />
-                      <span>{!dislikes ? (0) : dislikes}</span>
-                    </li>
                   </ul>
                 </Grid>
                 <Grid >

@@ -4,7 +4,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import styles from './Header.module.scss';
 import Container from '@mui/material/Container';
 import Avatar from "@mui/material/Avatar";
-import {Chip} from "@mui/material";
+import {Box, Chip} from "@mui/material";
 
 
 export const Header = () => {
@@ -31,7 +31,6 @@ export const Header = () => {
             <Link className={styles.logo} to="/">
               <div>LET's READ TOGETHER</div>
             </Link>
-
             <div className={styles.buttons}>
               {isAuth ? (
                   <>
