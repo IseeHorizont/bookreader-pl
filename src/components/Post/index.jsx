@@ -15,11 +15,9 @@ import { EventSkeleton } from "./Skeleton";
 import axios from '../../axios';
 import Typography from "@mui/material/Typography";
 import { Card, CardContent } from "@mui/material";
-import Stack from "@mui/material/Stack";
 
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
-import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 
 
@@ -67,37 +65,35 @@ export const Post = ({
     }
   };
 
-  // todo !!!!!!!!!!!!!!!!!!!!!
-  // async function clickOnLike() {
-  //   try {
-  //     await axios.post('/rating/', {
-  //           eventId: _id,
-  //           creatorEmail: ${localStorage.getItem('email')},
-  //           vote: 'LIKE'
-  //         }, {
-  //           headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
-  //         }
-  //     );
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
+  async function clickOnLike() {
+    try {
+      await axios.post('/rating/', {
+            eventId: _id,
+            email: localStorage.getItem('email'),
+            vote: 'LIKE'
+          }, {
+            headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
+          }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-  // todo !!!!!!!!!!!!!!!!!!!!!
-  // async function clickOnDislike() {
-  //   try {
-  //     await axios.post('/rating/', {
-  //           eventId: _id,
-  //           creatorEmail: ${localStorage.getItem('email')},
-  //           vote: 'DISLIKE'
-  //         }, {
-  //           headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
-  //         }
-  //     );
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
+  async function clickOnDislike() {
+    try {
+      await axios.post('/rating/', {
+            eventId: _id,
+            email: localStorage.getItem('email'),
+            vote: 'DISLIKE'
+          }, {
+            headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
+          }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div className={clsx(styles.root, { [styles.rootFull]: isFullEvent })}>
@@ -160,7 +156,7 @@ export const Post = ({
               </li>
             ))}
           </ul>
-          {children && <div className={styles.content}>{children}</div>}          {/* todo  what's this?? */}
+          {children && <div className={styles.content}>{children}</div>}
 
           {isFullEvent ? (
               <Grid container direction="row" justifyContent="space-between" alignItems="baseline">
@@ -185,11 +181,11 @@ export const Post = ({
                   </ul>
                 </Grid>
                 <Grid >
-                  <IconButton className={styles.voteButtons}>
+                  <IconButton className={styles.voteButtons} onClick={() => clickOnLike()}>
                     <ThumbUpIcon />
                     <span>{!likes ? (0) : likes}</span>
                   </IconButton>
-                  <IconButton className={styles.voteButtons}>
+                  <IconButton className={styles.voteButtons} onClick={() => clickOnDislike()}>
                     <ThumbDownIcon />
                     <span>{!dislikes ? (0) : dislikes}</span>
                   </IconButton>
