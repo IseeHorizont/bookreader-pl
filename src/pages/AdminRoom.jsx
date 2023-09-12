@@ -1,5 +1,5 @@
 import Grid from "@mui/material/Grid";
-import logo from "../logo.png";
+import logo from "../logo-white.png";
 import {AdminTable} from "../components/AdminTable";
 
 export const AdminRoom = () => {
@@ -13,10 +13,11 @@ export const AdminRoom = () => {
               spacing={1}
         >
             <Grid>
-                <img src={logo} width={500} height={150}/>
+                <img src={logo} width={400} height={120}/>
             </Grid>
             <Grid>
-                <h2>Статистика сервиса</h2>
+                <br/>
+                <h1>Статистика сервиса</h1>
             </Grid>
 
             <Grid>

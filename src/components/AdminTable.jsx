@@ -1,7 +1,10 @@
 import {Table, TableBody, TableCell, tableCellClasses, TableContainer, TableHead, TableRow} from "@mui/material";
 import Paper from "@mui/material/Paper";
-import {styled} from "@mui/styles";
-
+import {makeStyles, styled} from "@mui/styles";
+import {createTheme} from "@mui/material/styles";
+import {lime, purple} from "@mui/material/colors";
+import { deepOrange } from '@mui/material/colors';
+import { teal } from '@mui/material/colors';
 
 export const AdminTable = ({
 
@@ -9,48 +12,63 @@ export const AdminTable = ({
 
 }) => {
 
+    const colorTableCell = deepOrange[200];
+    const colorTableOddRow = deepOrange[100];
+    const colorTableEvenRow = deepOrange[50];
+
+    const colorTableCell__1 = teal[200];
+    const colorTableOddRow__1 = teal[100];
+    const colorTableEvenRow__1 = teal[50];
+
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {
-            backgroundColor: theme.palette.common.black,
-            color: theme.palette.common.white,
+            //backgroundColor: theme.palette.primary.light,
+            //color: theme.palette.common.white,
+            backgroundColor: colorTableCell__1,
+            fontSize: 20,
+            //color: "black",
+            borderBottom: "2px solid black",
+            fontWeight: 'bold'
         },
         [`&.${tableCellClasses.body}`]: {
-            fontSize: 14,
+            fontSize: 18,
         },
     }));
 
     const StyledTableRow = styled(TableRow)(({ theme }) => ({
         '&:nth-of-type(odd)': {
-            backgroundColor: theme.palette.action.hover,
+            backgroundColor: colorTableEvenRow__1,
         },
-        // hide last border
+        '&:nth-of-type(even)': {
+            backgroundColor: colorTableOddRow__1,
+        },
         '&:last-child td, &:last-child th': {
             border: 0,
         },
     }));
 
-    function createData(name, calories, fat, carbs, protein) {
-        return { name, calories, fat, carbs, protein };
+    function createData(name, calories) {
+        return { name, calories};
     }
 
     const rows = [
-        createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-        createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-        createData('Eclair', 262, 16.0, 24, 6.0),
-        createData('Cupcake', 305, 3.7, 67, 4.3),
-        createData('Gingerbread', 356, 16.0, 49, 3.9),
+        createData('French fry', 159 ),
+        createData('Ice cream sandwich', 237 ),
+        createData('Eclair', 262),
+        createData('Cupcake', 305),
+        createData('Gingerbread', 356),
     ];
 
     return (
         <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 700 }} aria-label="customized table">
-                <TableHead>
-                    <TableRow>
-                        <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-                        <StyledTableCell align="right">Calories</StyledTableCell>
-                        <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-                        <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-                        <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+            <Table sx={{ minWidth: 800 }} aria-label="customized table">
+                <TableHead >
+                    <TableRow >
+                        <StyledTableCell align="center">Метрики сервиса</StyledTableCell>
+                        <StyledTableCell align="center">Показатели</StyledTableCell>
+                        {/*<StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>*/}
+                        {/*<StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>*/}
+                        {/*<StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>*/}
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -59,10 +77,10 @@ export const AdminTable = ({
                             <StyledTableCell component="th" scope="row">
                                 {row.name}
                             </StyledTableCell>
-                            <StyledTableCell align="right">{row.calories}</StyledTableCell>
-                            <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                            <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-                            <StyledTableCell align="right">{row.protein}</StyledTableCell>
+                            <StyledTableCell align="center">{row.calories}</StyledTableCell>
+                            {/*<StyledTableCell align="center">{row.fat}</StyledTableCell>*/}
+                            {/*<StyledTableCell align="center">{row.carbs}</StyledTableCell>*/}
+                            {/*<StyledTableCell align="center">{row.protein}</StyledTableCell>*/}
                         </StyledTableRow>
                     ))}
                 </TableBody>
