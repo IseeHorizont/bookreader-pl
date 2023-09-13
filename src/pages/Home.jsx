@@ -144,9 +144,9 @@ export const Home = () => {
                                         commentsCount={Math.floor(Math.random() * 50) + 1}
                                         createdAt={obj.createdAt}
 
-                                        isEditable={obj.creatorEmail === localStorage.getItem('email')}
+                                        isEditable={(obj.creatorEmail === localStorage.getItem('email')) ||
+                                                    (localStorage.getItem('role') === 'ADMIN')}
                                         isAuth={isAuth}
-                                        //isLoading={obj}
 
                                         likes={getLikesByEventId(obj.id)}
                                         dislikes={getDislikesByEventId(obj.id)}
@@ -236,7 +236,8 @@ export const Home = () => {
                                         commentsCount={Math.floor(Math.random() * 50) + 1}
                                         createdAt={obj.createdAt}
 
-                                        isEditable={obj.creatorEmail === localStorage.getItem('email')}
+                                        isEditable={obj.creatorEmail === localStorage.getItem('email') ||
+                                                    (localStorage.getItem('role') === 'ADMIN')}
                                         isAuth={isAuth}
 
                                         likes={getLikesByEventId(obj.id)}
