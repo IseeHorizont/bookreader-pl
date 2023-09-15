@@ -11,6 +11,7 @@ export const FullEvent = () => {
     const [data, setData] = useState();
     const { eventId } = useParams();
     const [eventRating, setEventRating] = useState([]);
+    const [comments, setComments] = useState([]);
 
     useEffect(() => {
         const currentToken = localStorage.getItem('token');
@@ -30,6 +31,20 @@ export const FullEvent = () => {
             .then((response) => {
                 setEventRating(response.data);
             })
+
+        // todo getting comments
+        axios
+            .get('/comment', { headers: { Authorization: `Bearer ${currentToken}`},
+                                         params: { eventId: eventId } }
+            )
+            .then(({ data }) => {
+                console.log(data);
+                setComments(data);
+            })
+            .catch((err) => {
+                alert('Ошибка при получении события');
+                console.warn(err);
+            });
 
     }, [eventId]);
 
@@ -64,22 +79,23 @@ export const FullEvent = () => {
             />
             {data && (
                 <CommentsBlock
-                    items={[
-                        {
-                            user: {
-                                fullName: "Василий Малов",
-                                avatarUrl: "https://img.freepik.com/premium-psd/people-avatar-3d-illustration_235528-1573.jpg?w=2000",
-                            },
-                            text: "Это тестовый комментарий. Нет поводов для паники...",
-                        },
-                        {
-                            user: {
-                                fullName: "Иван Доставалов",
-                                avatarUrl: "https://img.freepik.com/free-psd/3d-illustration-person-with-glasses_23-2149436189.jpg?w=2000&t=st=1693334811~exp=1693335411~hmac=b139cdad69fa6b60313326e17037575dd12df8a0a589a555dc200b1fbeed35cf",
-                            },
-                            text: "Тестовый комментарий. Да, это тестовый комментарий",
-                        },
-                    ]}
+                    items={comments}
+                    // items={[
+                    //     {
+                    //         user: {
+                    //             fullName: "Василий Малов",
+                    //             avatarUrl: "https://img.freepik.com/premium-psd/people-avatar-3d-illustration_235528-1573.jpg?w=2000",
+                    //         },
+                    //         text: "Это тестовый комментарий. Нет поводов для паники...",
+                    //     },
+                    //     {
+                    //         user: {
+                    //             fullName: "Иван Доставалов",
+                    //             avatarUrl: "https://img.freepik.com/free-psd/3d-illustration-person-with-glasses_23-2149436189.jpg?w=2000&t=st=1693334811~exp=1693335411~hmac=b139cdad69fa6b60313326e17037575dd12df8a0a589a555dc200b1fbeed35cf",
+                    //         },
+                    //         text: "Тестовый комментарий. Да, это тестовый комментарий",
+                    //     },
+                    // ]}
                     isLoading={false}>
                     <Index />
                 </CommentsBlock>
