@@ -67,7 +67,7 @@ export const FullEvent = () => {
                 tags={[data.categoryName]}
 
                 viewsCount={Math.floor(Math.random() * 50) + 1}
-                commentsCount={Math.floor(Math.random() * 50) + 1}
+                commentsCount={data.commentCounter}
                 createdAt={data.createdAt}
 
                 isEditable={data.creatorEmail === localStorage.getItem('email')}

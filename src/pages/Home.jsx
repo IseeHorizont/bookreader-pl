@@ -17,6 +17,8 @@ import TagIcon from "@mui/icons-material/Tag";
 import Skeleton from "@mui/material/Skeleton";
 import ListItemText from "@mui/material/ListItemText";
 import {SideBlock} from "../components/SideBlock";
+import Button from "@mui/material/Button";
+import img from "../work-in-progress.jpg";
 
 export const Home = () => {
 
@@ -141,7 +143,7 @@ export const Home = () => {
                                         tags={[obj.categoryName]}
 
                                         viewsCount={Math.floor(Math.random() * 50) + 1}
-                                        commentsCount={Math.floor(Math.random() * 50) + 1}
+                                        commentsCount={obj.commentCounter}
                                         createdAt={obj.createdAt}
 
                                         isEditable={(obj.creatorEmail === localStorage.getItem('email')) ||
@@ -233,7 +235,7 @@ export const Home = () => {
                                         tags={[obj.categoryName]}
 
                                         viewsCount={Math.floor(Math.random() * 50) + 1}
-                                        commentsCount={Math.floor(Math.random() * 50) + 1}
+                                        commentsCount={obj.commentCounter}
                                         createdAt={obj.createdAt}
 
                                         isEditable={obj.creatorEmail === localStorage.getItem('email') ||
@@ -287,7 +289,7 @@ export const Home = () => {
                                                 tags={[obj.categoryName]}
 
                                                 viewsCount={Math.floor(Math.random() * 50) + 1}
-                                                commentsCount={Math.floor(Math.random() * 50) + 1}
+                                                commentsCount={obj.commentCounter}
                                                 createdAt={obj.createdAt}
 
                                                 isEditable={obj.creatorEmail === localStorage.getItem('email')}
@@ -326,7 +328,22 @@ export const Home = () => {
                     </TabPanel>
                     {/* todo Auth && popular events */}
                     <TabPanel value="4">
-                        <Typography>Раздел в разработке. Мы скоро!</Typography>
+                        <Box >
+                            <Grid item xs={6} container spacing={1}>
+                                <Grid style={{textAlign: "start"}} xs={12}>
+                                    <img
+                                        src={img}
+                                        alt=""
+                                        width={500} height={500}
+                                    />
+                                </Grid>
+                                <Grid style={{textAlign: "start"}} xs={12}>
+                                    <Typography variant="h4">
+                                        Раздел в разработке. Мы скоро!
+                                    </Typography>
+                                </Grid>
+                            </Grid>
+                        </Box>
                     </TabPanel>
                 </TabContext>
             ) : (
@@ -361,7 +378,7 @@ export const Home = () => {
                                         tags={[obj.categoryName]}
 
                                         viewsCount={Math.floor(Math.random() * 50) + 1}
-                                        commentsCount={Math.floor(Math.random() * 50) + 1}
+                                        commentsCount={obj.commentCounter}
                                         createdAt={obj.createdAt}
 
                                         isEditable={obj.creatorEmail === localStorage.getItem('email')}
@@ -451,7 +468,7 @@ export const Home = () => {
                                         tags={[obj.categoryName]}
 
                                         viewsCount={Math.floor(Math.random() * 50) + 1}
-                                        commentsCount={Math.floor(Math.random() * 50) + 1}
+                                        commentsCount={obj.commentCounter}
                                         createdAt={obj.createdAt}
 
                                         isEditable={obj.creatorEmail === localStorage.getItem('email')}
