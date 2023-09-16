@@ -8,11 +8,20 @@ import React from "react";
 import { useState } from 'react';
 import axios from "../../axios";
 import { useNavigate } from "react-router-dom";
+import {FormControl, InputAdornment, InputLabel, OutlinedInput} from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import {Visibility, VisibilityOff} from "@mui/icons-material";
 
 
 export const Login = () => {
 
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
 
     const {
         register,
@@ -66,27 +75,38 @@ export const Login = () => {
                 Вход в аккаунт
             </Typography>
             <form onSubmit={handleSubmit(onSubmit)}>
+                <InputLabel htmlFor="outlined-adornment-password">E-mail</InputLabel>
                 <TextField
                     //required
                     className={styles.field}
-                    label="E-mail"
                     type="email"
                     error={!!errors.email}
                     helperText={errors.email?.message}
                     {...register('email', { required: 'Введите корректный email-адрес' })}
                     fullWidth
                 />
-                <TextField
-                    //required
+
+                <InputLabel htmlFor="outlined-adornment-password">Пароль</InputLabel>
+                <OutlinedInput
+                    type={showPassword ? "text" : "password"}
                     className={styles.field}
-                    label="Пароль"
-                    type="password"
-                    error={errors.password?.message}
+                    fullWidth
+                    error={!!errors.password}
                     helperText={errors.password?.message}
                     {...register('password', { required: 'Введите свой пароль' })}
-                    fullWidth
+                    endAdornment={
+                        <InputAdornment position="end">
+                            <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                                edge="end"
+                            >
+                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                        </InputAdornment>
+                    }
                 />
-
                 <Button type="submit" size="large" variant="contained" fullWidth>
                     Войти
                 </Button>
