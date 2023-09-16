@@ -37,7 +37,6 @@ export const Login = () => {
     });
 
     const onSubmit = async (creds) => {
-        console.log("creds: " + creds.email + " " + creds.password);
         try {
             const { data } = await axios.post('/auth/authenticate', creds);
             window.localStorage.setItem('token', data.token);

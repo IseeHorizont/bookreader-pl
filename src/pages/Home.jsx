@@ -28,6 +28,7 @@ export const Home = () => {
     const [ownEvents, setOwnEvents] = useState([]);
     const [tags, setTags] = useState([]);
     const [eventRating, setEventRating] = useState([]);
+    const [lastComments, setLastComments] = useState([]);
 
     let isAuth = localStorage.getItem('token');
 
@@ -75,6 +76,11 @@ export const Home = () => {
         axios.get('/rating/')
             .then((response) => {
                 setEventRating(response.data);
+            })
+
+        axios.get('/comment/top', { params: { limit: 3 } })
+            .then((response) => {
+                setLastComments(response.data);
             })
 
     }, []);
@@ -197,22 +203,7 @@ export const Home = () => {
                                     </List>
                                 </SideBlock>
                                 <CommentsBlock
-                                    items={[
-                                        {
-                                            user: {
-                                                fullName: "Василий Малов",
-                                                avatarUrl: "https://img.freepik.com/premium-psd/people-avatar-3d-illustration_235528-1573.jpg?w=2000",
-                                            },
-                                            text: "Тест комментария тут",
-                                        },
-                                        {
-                                            user: {
-                                                fullName: "Иван Доставалов",
-                                                avatarUrl: "https://img.freepik.com/free-psd/3d-illustration-person-with-glasses_23-2149436189.jpg?w=2000&t=st=1693334811~exp=1693335411~hmac=b139cdad69fa6b60313326e17037575dd12df8a0a589a555dc200b1fbeed35cf",
-                                            },
-                                            text: "Тест комментария тут. Тест комментария тут. Тест комментария тут",
-                                        },
-                                    ]}
+                                    items={lastComments}
                                     isLoading={false}
                                 />
                             </Grid>
@@ -250,22 +241,7 @@ export const Home = () => {
 
                             <Grid xs={4} item>
                                 <CommentsBlock
-                                    items={[
-                                        {
-                                            user: {
-                                                fullName: "Василий Малов",
-                                                avatarUrl: "https://img.freepik.com/premium-psd/people-avatar-3d-illustration_235528-1573.jpg?w=2000",
-                                            },
-                                            text: "Тест комментария тут",
-                                        },
-                                        {
-                                            user: {
-                                                fullName: "Иван Доставалов",
-                                                avatarUrl: "https://img.freepik.com/free-psd/3d-illustration-person-with-glasses_23-2149436189.jpg?w=2000&t=st=1693334811~exp=1693335411~hmac=b139cdad69fa6b60313326e17037575dd12df8a0a589a555dc200b1fbeed35cf",
-                                            },
-                                            text: "Тест комментария тут. Тест комментария тут. Тест комментария тут",
-                                        },
-                                    ]}
+                                    items={lastComments}
                                     isLoading={false}
                                 />
                             </Grid>
@@ -302,22 +278,7 @@ export const Home = () => {
                                     </Grid>
                                     <Grid xs={4} item>
                                         <CommentsBlock
-                                            items={[
-                                                {
-                                                    user: {
-                                                        fullName: "Василий Малов",
-                                                        avatarUrl: "https://img.freepik.com/premium-psd/people-avatar-3d-illustration_235528-1573.jpg?w=2000",
-                                                    },
-                                                    text: "Тест комментария тут",
-                                                },
-                                                {
-                                                    user: {
-                                                        fullName: "Иван Доставалов",
-                                                        avatarUrl: "https://img.freepik.com/free-psd/3d-illustration-person-with-glasses_23-2149436189.jpg?w=2000&t=st=1693334811~exp=1693335411~hmac=b139cdad69fa6b60313326e17037575dd12df8a0a589a555dc200b1fbeed35cf",
-                                                    },
-                                                    text: "Тест комментария тут. Тест комментария тут. Тест комментария тут",
-                                                },
-                                            ]}
+                                            items={lastComments}
                                             isLoading={false}
                                         />
                                     </Grid>
@@ -431,22 +392,7 @@ export const Home = () => {
                                     </List>
                                 </SideBlock>
                                 <CommentsBlock
-                                    items={[
-                                        {
-                                            user: {
-                                                fullName: "Василий Малов",
-                                                avatarUrl: "https://img.freepik.com/premium-psd/people-avatar-3d-illustration_235528-1573.jpg?w=2000",
-                                            },
-                                            text: "Тест комментария тут",
-                                        },
-                                        {
-                                            user: {
-                                                fullName: "Иван Доставалов",
-                                                avatarUrl: "https://img.freepik.com/free-psd/3d-illustration-person-with-glasses_23-2149436189.jpg?w=2000&t=st=1693334811~exp=1693335411~hmac=b139cdad69fa6b60313326e17037575dd12df8a0a589a555dc200b1fbeed35cf",
-                                            },
-                                            text: "Тест комментария тут. Тест комментария тут. Тест комментария тут",
-                                        },
-                                    ]}
+                                    items={lastComments}
                                     isLoading={false}
                                 />
                             </Grid>
@@ -480,22 +426,7 @@ export const Home = () => {
                             </Grid>
                             <Grid xs={4} item>
                                 <CommentsBlock
-                                    items={[
-                                        {
-                                            user: {
-                                                fullName: "Василий Малов",
-                                                avatarUrl: "https://img.freepik.com/premium-psd/people-avatar-3d-illustration_235528-1573.jpg?w=2000",
-                                            },
-                                            text: "Тест комментария тут",
-                                        },
-                                        {
-                                            user: {
-                                                fullName: "Иван Доставалов",
-                                                avatarUrl: "https://img.freepik.com/free-psd/3d-illustration-person-with-glasses_23-2149436189.jpg?w=2000&t=st=1693334811~exp=1693335411~hmac=b139cdad69fa6b60313326e17037575dd12df8a0a589a555dc200b1fbeed35cf",
-                                            },
-                                            text: "Тест комментария тут. Тест комментария тут. Тест комментария тут",
-                                        },
-                                    ]}
+                                    items={lastComments}
                                     isLoading={false}
                                 />
                             </Grid>
