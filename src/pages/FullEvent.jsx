@@ -80,24 +80,11 @@ export const FullEvent = () => {
             {data && (
                 <CommentsBlock
                     items={comments}
-                    // items={[
-                    //     {
-                    //         user: {
-                    //             fullName: "Василий Малов",
-                    //             avatarUrl: "https://img.freepik.com/premium-psd/people-avatar-3d-illustration_235528-1573.jpg?w=2000",
-                    //         },
-                    //         text: "Это тестовый комментарий. Нет поводов для паники...",
-                    //     },
-                    //     {
-                    //         user: {
-                    //             fullName: "Иван Доставалов",
-                    //             avatarUrl: "https://img.freepik.com/free-psd/3d-illustration-person-with-glasses_23-2149436189.jpg?w=2000&t=st=1693334811~exp=1693335411~hmac=b139cdad69fa6b60313326e17037575dd12df8a0a589a555dc200b1fbeed35cf",
-                    //         },
-                    //         text: "Тестовый комментарий. Да, это тестовый комментарий",
-                    //     },
-                    // ]}
-                    isLoading={false}>
-                    <Index />
+                    isLoading={false}
+                >
+                    <Index >
+
+                    </Index>
                 </CommentsBlock>
             )}
         </div>

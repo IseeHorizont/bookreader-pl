@@ -79,7 +79,7 @@ export const Home = () => {
 
     const getOwnEvents = () => {
         const currentToken = localStorage.getItem('token');
-        axios.get('/event/own/', {headers: { Authorization: `Bearer ${currentToken}`}})
+        axios.get('/event/own/', { headers: { Authorization: `Bearer ${currentToken}`} })
             .then((response) => {
                 setOwnEvents(response.data);
             });
