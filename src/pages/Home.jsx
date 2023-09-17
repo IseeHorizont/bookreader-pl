@@ -93,7 +93,6 @@ export const Home = () => {
             });
     }
 
-    // rating: likeCounter by eventId
     const getLikesByEventId = (eventId) => {
         for (let index in eventRating) {
             if (eventRating[index].eventId === eventId) {
@@ -103,7 +102,6 @@ export const Home = () => {
         return 0;
     }
 
-    // rating: dislikeCounter by eventId
     const getDislikesByEventId = (eventId) => {
         for (let index in eventRating) {
             if (eventRating[index].eventId === eventId) {
@@ -131,7 +129,7 @@ export const Home = () => {
                             <Tab label="Популярные" value="4" />
                         </TabList>
                     </Box>
-                    {/* todo Auth && all events */}
+                    {/* Auth && all events */}
                     <TabPanel value="1">
                         <Grid container spacing={4}>
                             <Grid xs={8} item>
@@ -209,7 +207,7 @@ export const Home = () => {
                             </Grid>
                         </Grid>
                     </TabPanel>
-                    {/* todo Auth && new events */}
+                    {/* Auth && new events */}
                     <TabPanel value="2">
                         <Grid container spacing={4}>
                             <Grid xs={8} item>
@@ -247,7 +245,7 @@ export const Home = () => {
                             </Grid>
                         </Grid>
                     </TabPanel>
-                    {/* todo Auth && own events */}
+                    {/* Auth && own events */}
                     <TabPanel value="3">
                         {ownEvents.length > 0 ? (
                             <Grid container spacing={4}>
@@ -287,7 +285,7 @@ export const Home = () => {
                             <Typography>У Вас ещё нет собственных событий</Typography>
                         )}
                     </TabPanel>
-                    {/* todo Auth && popular events */}
+                    {/* Auth && popular events */}
                     <TabPanel value="4">
                         <Box >
                             <Grid item xs={6} container spacing={1}>
@@ -308,7 +306,7 @@ export const Home = () => {
                     </TabPanel>
                 </TabContext>
             ) : (
-                // todo isNotAuth: show tab: all & new
+                // isNotAuth: show tab: all & new
                 <TabContext value={value}>
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                         <TabList

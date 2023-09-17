@@ -10,12 +10,6 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
     <>
-        {/*<CssBaseline />*/}
-        {/*<ThemeProvider theme={theme}>*/}
-        {/*    <BrowserRouter>*/}
-        {/*        <App />*/}
-        {/*    </BrowserRouter>*/}
-        {/*</ThemeProvider>*/}
         <BrowserRouter>
             <CssBaseline />
             <ThemeProvider theme={theme}>

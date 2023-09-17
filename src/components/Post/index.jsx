@@ -40,7 +40,6 @@ export const Post = ({
   likes,          // all likes
   dislikes,       // all dislikes
 
-  // todo unused fields
   children,
   isFullEvent,
 

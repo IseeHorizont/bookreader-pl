@@ -1,19 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
-import {Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './Header.module.scss';
 import Container from '@mui/material/Container';
 import Avatar from "@mui/material/Avatar";
-import {Box, Chip} from "@mui/material";
-import clsx from "clsx";
+import { Chip } from "@mui/material";
 
 
 export const Header = () => {
   const navigate = useNavigate();
   let isAuth = localStorage.getItem('token');
   let isAdmin = localStorage.getItem('role') === 'ADMIN';
-
-  //console.log('isAdmin: ' + isAdmin); // todo ?????
 
   const [clientBadge, setClientBadge] = useState(null);
   const [clientName, setClientName] = useState('');

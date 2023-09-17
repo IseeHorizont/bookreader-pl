@@ -11,8 +11,6 @@ import styles from './AddEvent.module.scss';
 
 export const AddEvent = () => {
     const navigate = useNavigate();
-    //const { id } = useParams();
-    //const inputFileRef = React.useRef(null);
     const [isLoading, setIsLoading] = React.useState(false);
     const [fields, setFields] = React.useState({
         eventTitle: '',
@@ -63,7 +61,7 @@ export const AddEvent = () => {
                     eventImage: fields.imageUrl,
                     eventTitle: fields.eventTitle,
                     description: fields.description,
-                    categoryName: fields.categoryName, // todo fields.categoryName.split(','),
+                    categoryName: fields.categoryName,
                     bookTitle: fields.bookTitle,
                     bookAuthor: fields.bookAuthor,
                     bookPublicationYear: fields.bookPublicationYear

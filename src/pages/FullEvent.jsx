@@ -32,7 +32,6 @@ export const FullEvent = () => {
                 setEventRating(response.data);
             })
 
-        // todo getting comments
         axios
             .get('/comment', { headers: { Authorization: `Bearer ${currentToken}`},
                                          params: { eventId: eventId } }

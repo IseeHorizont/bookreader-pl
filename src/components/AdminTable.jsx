@@ -6,18 +6,15 @@ import { brown } from "@mui/material/colors";
 import { deepOrange } from '@mui/material/colors';
 
 export const AdminTable = ({
-
     allUsers,
     activeUsers,
     allEvents,
     deletedEvents,
     popularTags,
-
 }) => {
-
-    const colorTableCell = deepOrange[100]; //teal[200];
-    const colorTableOddRow = deepOrange[50]; //teal[100];
-    const colorTableEvenRow = brown[50]; //teal[50];
+    const colorTableCell = deepOrange[100];
+    const colorTableOddRow = deepOrange[50];
+    const colorTableEvenRow = brown[50];
 
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {

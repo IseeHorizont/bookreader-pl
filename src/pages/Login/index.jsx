@@ -76,7 +76,6 @@ export const Login = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <InputLabel htmlFor="outlined-adornment-password">E-mail</InputLabel>
                 <TextField
-                    //required
                     className={styles.field}
                     type="email"
                     error={!!errors.email}
