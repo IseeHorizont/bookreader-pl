@@ -63,7 +63,7 @@ export const Home = () => {
         }
 
         // last 10 the newest events
-        axios.get('/event/new', { params: { Limit: 10 } })
+        axios.get('/event/new', { params: { limit: 10 } })
             .then((response) => {
                 setNewEvents(response.data);
             })
