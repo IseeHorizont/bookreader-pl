@@ -26,6 +26,7 @@ export const Home = () => {
     const [events, setEvents] = useState([]);
     const [newEvents, setNewEvents] = useState([]);
     const [ownEvents, setOwnEvents] = useState([]);
+    const [popularEvents, setPopularEvents] = useState([]);
     const [tags, setTags] = useState([]);
     const [eventRating, setEventRating] = useState([]);
     const [lastComments, setLastComments] = useState([]);
@@ -34,7 +35,7 @@ export const Home = () => {
 
     const handleChange = (value, newValue) => {
         setValue(newValue);
-        if (newValue === '3') {
+        if (newValue === '3' && isAuth) {
             getOwnEvents();
         }
     };
@@ -83,6 +84,11 @@ export const Home = () => {
                 setLastComments(response.data);
             })
 
+        axios.get('/event/popular', { params: { limit: 5 } })
+            .then((response) => {
+                setPopularEvents(response.data);
+            })
+
     }, []);
 
     const getOwnEvents = () => {
@@ -127,6 +133,7 @@ export const Home = () => {
                             <Tab label="Новые" value="2" />
                             <Tab label="Только мои" value="3" />
                             <Tab label="Популярные" value="4" />
+                            <Tab label="Избранное" value="5" />
                         </TabList>
                     </Box>
                     {/* Auth && all events */}
@@ -287,6 +294,44 @@ export const Home = () => {
                     </TabPanel>
                     {/* Auth && popular events */}
                     <TabPanel value="4">
+                        <Grid container spacing={4}>
+                            <Grid xs={8} item>
+                                {popularEvents.map((obj) => (
+                                    <Post
+                                        _id={obj.id}
+                                        imageUrl={obj.eventImage}
+                                        user={{
+                                            avatarUrl: obj.avatar,
+                                            fullName: obj.creatorName
+                                        }}
+                                        description={obj.description}
+                                        book={obj.bookAuthor + ": " + obj.bookTitle}
+                                        tags={[obj.categoryName]}
+
+                                        viewsCount={Math.floor(Math.random() * 50) + 1}
+                                        commentsCount={obj.commentCounter}
+                                        createdAt={obj.createdAt}
+
+                                        isEditable={obj.creatorEmail === localStorage.getItem('email') ||
+                                            (localStorage.getItem('role') === 'ADMIN')}
+                                        isAuth={isAuth}
+
+                                        likes={getLikesByEventId(obj.id)}
+                                        dislikes={getDislikesByEventId(obj.id)}
+                                    />
+                                ))}
+                            </Grid>
+
+                            <Grid xs={4} item>
+                                <CommentsBlock
+                                    items={lastComments}
+                                    isLoading={false}
+                                />
+                            </Grid>
+                        </Grid>
+                    </TabPanel>
+                    {/* Auth && favorite events */}
+                    <TabPanel value="5">
                         <Box >
                             <Grid item xs={6} container spacing={1}>
                                 <Grid style={{textAlign: "start"}} xs={12}>
@@ -319,6 +364,7 @@ export const Home = () => {
                         >
                             <Tab label="Все" value="1" />
                             <Tab label="Новые" value="2" />
+                            <Tab label="Популярные" value="3" />
                         </TabList>
                     </Box>
                     <TabPanel value="1">
@@ -422,6 +468,43 @@ export const Home = () => {
                                     />
                                 ))}
                             </Grid>
+                            <Grid xs={4} item>
+                                <CommentsBlock
+                                    items={lastComments}
+                                    isLoading={false}
+                                />
+                            </Grid>
+                        </Grid>
+                    </TabPanel>
+                    <TabPanel value="3">
+                        <Grid container spacing={4}>
+                            <Grid xs={8} item>
+                                {popularEvents.map((obj) => (
+                                    <Post
+                                        _id={obj.id}
+                                        imageUrl={obj.eventImage}
+                                        user={{
+                                            avatarUrl: obj.avatar,
+                                            fullName: obj.creatorName
+                                        }}
+                                        description={obj.description}
+                                        book={obj.bookAuthor + ": " + obj.bookTitle}
+                                        tags={[obj.categoryName]}
+
+                                        viewsCount={Math.floor(Math.random() * 50) + 1}
+                                        commentsCount={obj.commentCounter}
+                                        createdAt={obj.createdAt}
+
+                                        isEditable={obj.creatorEmail === localStorage.getItem('email') ||
+                                            (localStorage.getItem('role') === 'ADMIN')}
+                                        isAuth={isAuth}
+
+                                        likes={getLikesByEventId(obj.id)}
+                                        dislikes={getDislikesByEventId(obj.id)}
+                                    />
+                                ))}
+                            </Grid>
+
                             <Grid xs={4} item>
                                 <CommentsBlock
                                     items={lastComments}
