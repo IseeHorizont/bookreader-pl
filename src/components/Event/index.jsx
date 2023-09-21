@@ -9,7 +9,7 @@ import CommentIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 
-import styles from "./Post.module.scss";
+import styles from "./Event.module.scss";
 import { UserInfo } from "../UserInfo";
 import { EventSkeleton } from "./Skeleton";
 import axios from '../../axios';
@@ -21,7 +21,7 @@ import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import Grid from "@mui/material/Grid";
 
 
-export const Post = ({
+export const Event = ({
   _id,            // 'id'
   imageUrl,       // 'eventImage'
   user,           // 'avatar' & creatorName

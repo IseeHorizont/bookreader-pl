@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Grid from '@mui/material/Grid';
-import { Post } from "../components/Post";
+import { Event } from "../components/Event";
 import { CommentsBlock } from "../components/CommentsBlock";
 import {Box} from "@mui/material";
 import Tab from '@mui/material/Tab';
@@ -17,7 +17,6 @@ import TagIcon from "@mui/icons-material/Tag";
 import Skeleton from "@mui/material/Skeleton";
 import ListItemText from "@mui/material/ListItemText";
 import {SideBlock} from "../components/SideBlock";
-import Button from "@mui/material/Button";
 import img from "../work-in-progress.jpg";
 
 export const Home = () => {
@@ -141,7 +140,7 @@ export const Home = () => {
                         <Grid container spacing={4}>
                             <Grid xs={8} item>
                                 {events.map((obj) => (
-                                    <Post
+                                    <Event
                                         _id={obj.id}
 
                                         imageUrl={obj.eventImage}
@@ -219,7 +218,7 @@ export const Home = () => {
                         <Grid container spacing={4}>
                             <Grid xs={8} item>
                                 {newEvents.map((obj) => (
-                                    <Post
+                                    <Event
                                         _id={obj.id}
                                         imageUrl={obj.eventImage}
                                         user={{
@@ -258,7 +257,7 @@ export const Home = () => {
                             <Grid container spacing={4}>
                                     <Grid xs={8} item>
                                         {ownEvents.map((obj) => (
-                                            <Post
+                                            <Event
                                                 _id={obj.id}
                                                 imageUrl={obj.eventImage}
                                                 user={{
@@ -297,7 +296,7 @@ export const Home = () => {
                         <Grid container spacing={4}>
                             <Grid xs={8} item>
                                 {popularEvents.map((obj) => (
-                                    <Post
+                                    <Event
                                         _id={obj.id}
                                         imageUrl={obj.eventImage}
                                         user={{
@@ -371,7 +370,7 @@ export const Home = () => {
                         <Grid container spacing={4}>
                             <Grid xs={8} item>
                                 {events.map((obj) => (
-                                    <Post
+                                    <Event
                                         _id={obj.id}
                                         imageUrl={obj.eventImage}
                                         user={{
@@ -446,7 +445,7 @@ export const Home = () => {
                         <Grid container spacing={4}>
                             <Grid xs={8} item>
                                 {newEvents.map((obj) => (
-                                    <Post
+                                    <Event
                                         _id={obj.id}
                                         imageUrl={obj.eventImage}
                                         user={{
@@ -480,7 +479,7 @@ export const Home = () => {
                         <Grid container spacing={4}>
                             <Grid xs={8} item>
                                 {popularEvents.map((obj) => (
-                                    <Post
+                                    <Event
                                         _id={obj.id}
                                         imageUrl={obj.eventImage}
                                         user={{

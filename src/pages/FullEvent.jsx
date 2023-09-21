@@ -1,9 +1,9 @@
-import { Post } from "../components/Post";
+import { Event } from "../components/Event";
 import { CommentsBlock } from "../components/CommentsBlock";
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import axios from '../axios';
-import {EventSkeleton} from "../components/Post/Skeleton";
+import {EventSkeleton} from "../components/Event/Skeleton";
 import {Index} from "../components/AddComment";
 
 
@@ -53,7 +53,7 @@ export const FullEvent = () => {
 
     return (
         <div>
-            <Post
+            <Event
                 _id={eventId}
                 imageUrl={data.eventImage}
                 user={{
