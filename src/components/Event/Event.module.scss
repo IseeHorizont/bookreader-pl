@@ -113,7 +113,7 @@ $blue: #4361ee;
   }
 }
 
-.postDetails {
+.eventDetails {
   list-style: none;
   padding: 0;
   margin: 20px 0 0 0;
@@ -126,7 +126,7 @@ $blue: #4361ee;
     opacity: 0.5;
 
     svg {
-      font-size: 18px;
+      font-size: 26px;
       margin-right: 5px;
     }
   }
@@ -140,6 +140,32 @@ $blue: #4361ee;
     svg {
       font-size: 20px;
     }
+  }
+}
+
+.joinEventScore {
+  ul {
+    margin: 0;
+  }
+  padding: 0;
+  overflow: hidden;
+  text-align: center;
+
+  ul li {
+    list-style: none;
+    display: inline-block;
+    align-items: center;
+    padding: 10px;
+  }
+
+}
+
+.joinEventButtons {
+  color: darkgreen;
+  font-size: 20px;
+
+  &:hover {
+    color: #ffa08c;
   }
 }
 

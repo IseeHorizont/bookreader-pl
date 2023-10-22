@@ -14,12 +14,13 @@ import { UserInfo } from "../UserInfo";
 import { EventSkeleton } from "./Skeleton";
 import axios from '../../axios';
 import Typography from "@mui/material/Typography";
-import { Card, CardContent } from "@mui/material";
+import {Card, CardContent, Fab, Icon} from "@mui/material";
 
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import Grid from "@mui/material/Grid";
-
+import {AddCircleRounded} from "@mui/icons-material";
+import GroupsIcon from '@mui/icons-material/Groups';
 
 export const Event = ({
   _id,            // 'id'
@@ -94,6 +95,11 @@ export const Event = ({
     }
   }
 
+  async function clickOnJoinEvent() {
+    // todo <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    console.log("click on => clickOnJoinEvent")
+  }
+
   return (
     <div className={clsx(styles.root, { [styles.rootFull]: isFullEvent })}>
       {isEditable && (
@@ -160,7 +166,7 @@ export const Event = ({
           {isFullEvent ? (
               <Grid container direction="row" justifyContent="space-between" alignItems="baseline">
                 <Grid>
-                  <ul className={clsx(styles.postDetails, { [styles.postDetailsFull]: isFullEvent })}>
+                  <ul className={clsx(styles.eventDetails, { [styles.eventDetailsFull]: isFullEvent })} >
                     <li>
                       <EyeIcon />
                       <span>{viewsCount}</span>
@@ -171,7 +177,20 @@ export const Event = ({
                     </li>
                   </ul>
                 </Grid>
-                <Grid >
+
+                <Grid>
+                  <ul className={styles.joinEventScore}>
+                    <li>
+                      Участники: {Math.floor(Math.random() * (20 - 1) + 1)}
+                    </li>
+                    <li>
+                      <IconButton className={styles.joinEventButtons} color="primary" onClick={() => clickOnJoinEvent()}>
+                        <AddCircleRounded/>
+                      </IconButton>
+                    </li>
+                  </ul>
+                </Grid>
+                <Grid>
                   <IconButton className={styles.voteButtons} onClick={() => clickOnLike()}>
                     <ThumbUpIcon />
                     <span>{!likes ? (0) : likes}</span>
@@ -183,7 +202,7 @@ export const Event = ({
                 </Grid>
               </Grid>
           ) : (
-              <ul className={clsx(styles.postDetails, { [styles.postDetailsFull]: isFullEvent })}>
+              <ul className={clsx(styles.eventDetails, { [styles.eventDetailsFull]: isFullEvent })}>
                 <li>
                   <EyeIcon />
                   <span>{viewsCount}</span>
@@ -199,6 +218,10 @@ export const Event = ({
                 <li>
                   <SentimentVeryDissatisfiedIcon />
                   <span>{!dislikes ? (0) : dislikes}</span>
+                </li>
+                <li>
+                  <GroupsIcon/>
+                  <span>{Math.floor(Math.random() * (10 - 1) + 1)}</span>
                 </li>
               </ul>
           )}
