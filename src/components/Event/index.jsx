@@ -14,7 +14,7 @@ import { UserInfo } from "../UserInfo";
 import { EventSkeleton } from "./Skeleton";
 import axios from '../../axios';
 import Typography from "@mui/material/Typography";
-import {Card, CardContent, Fab, Icon} from "@mui/material";
+import { Card, CardContent } from "@mui/material";
 
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
@@ -96,7 +96,6 @@ export const Event = ({
   }
 
   async function clickOnJoinEvent() {
-    // todo <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     console.log("click on => clickOnJoinEvent")
   }
 
